@@ -1,0 +1,2249 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المحتويات - رياضيات الصف الثامن</title>
+    <!-- تُستخدم لالتقاط صورة غلاف فعلية (Screenshot) من ملفات الأنشطة المرفوعة -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #login-section { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 90vh; }
+        .login-card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; width: 300px; }
+        input[type="password"] { width: 100%; padding: 12px; margin: 20px 0; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; outline: none; transition: border 0.3s; }
+        input[type="password"]:focus { border-color: #3f9b7a; }
+
+        .main-header {
+            text-align: left;
+            color: #3f9b7a;
+            font-size: 38px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+
+        .toc-container { display: flex; justify-content: space-between; gap: 40px; max-width: 1000px; margin: 0 auto; flex-wrap: wrap; }
+        .column { flex: 1; min-width: 280px; }
+        .unit-title { color: #3f9b7a; font-weight: bold; font-size: 20px; margin-top: 30px; margin-bottom: 15px; }
+
+        ul { list-style: none; padding: 0; margin: 0; }
+        li { display: flex; align-items: center; margin-bottom: 15px; font-size: 16.5px; cursor: pointer; transition: color 0.3s ease; }
+        li:hover { color: #d15b40; font-weight: bold; }
+        .dots { flex-grow: 1; border-bottom: 2px dotted #999; margin: 0 10px; position: relative; top: -4px; }
+        .page-num { font-family: Arial, sans-serif; }
+
+        .btn {
+            background-color: #3f9b7a; color: white; border: none; padding: 12px 25px;
+            font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 15px; font-family: inherit; transition: background 0.3s;
+        }
+        .btn:hover { background-color: #2f7a5f; }
+        .btn-back { background-color: #888; margin-right: 10px; }
+        .btn-back:hover { background-color: #666; }
+
+        #lesson-section { display: none; max-width: 900px; margin: 20px auto; }
+        .lesson-header { color: #d15b40; font-size: 28px; font-weight: bold; margin-bottom: 30px; text-align: center; }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .section-card {
+            background: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 20px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .section-card .icon { font-size: 30px; }
+        .section-card .title { font-weight: bold; font-size: 16px; color: #555; }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            border-color: #3f9b7a;
+            box-shadow: 0 10px 20px rgba(63, 155, 122, 0.15);
+        }
+
+        .section-card.active {
+            background: linear-gradient(135deg, #3f9b7a, #2f7a5f);
+            border-color: #3f9b7a;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(63, 155, 122, 0.3);
+        }
+        .section-card.active .title { color: #ffffff; }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-block { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px dashed #eee; }
+        .question-block:last-child { border-bottom: none; }
+        .question-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #222; }
+        .options label { display: block; background: #f8f9fa; padding: 12px 15px; margin-bottom: 10px; border-radius: 8px; cursor: pointer; transition: background 0.2s, transform 0.1s; border: 1px solid #eee; }
+        .options label:hover { background: #e9ecef; transform: translateX(-5px); }
+        #result-box, #result-box-hard { margin-top: 20px; font-size: 20px; font-weight: bold; color: #27ae60; text-align: center; }
+        .correct-ans { background-color: #d4edda !important; border: 1px solid #c3e6cb !important; color: #155724; font-weight: bold; }
+        .wrong-ans { background-color: #f8d7da !important; border: 1px solid #f5c6cb !important; color: #721c24; }
+
+        .solution-toggle-btn {
+            background: none;
+            border: 1px dashed #3f9b7a;
+            color: #3f9b7a;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13.5px;
+            font-weight: bold;
+            font-family: inherit;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+        .solution-toggle-btn:hover { background-color: #eef8f4; }
+        .solution-box {
+            display: none;
+            margin-top: 10px;
+            padding: 12px 15px;
+            background-color: #fff8ec;
+            border: 1px solid #e8b84b;
+            border-radius: 10px;
+            font-size: 15px;
+            line-height: 1.9;
+            color: #5a4a20;
+            white-space: pre-line;
+        }
+        .solution-box.show { display: block; }
+
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        .summary-img-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+        }
+
+        .activity-img-wrap {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .activity-img-wrap img {
+            width: 100%;
+            max-width: 780px;
+            height: auto;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            cursor: zoom-in;
+            transition: box-shadow 0.2s ease;
+        }
+        .activity-img-wrap img:hover {
+            box-shadow: 0 6px 18px rgba(63, 155, 122, 0.25);
+        }
+        .activity-zoom-hint {
+            font-size: 13px;
+            color: #999;
+            margin-top: 6px;
+        }
+
+        #img-lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            cursor: zoom-out;
+        }
+        #rotate-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #1b1f23;
+            color: #fff;
+            z-index: 99999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        #rotate-overlay .rotate-icon {
+            font-size: 70px;
+            animation: rotate-hint 1.6s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        #rotate-overlay p {
+            font-size: 18px;
+            font-weight: bold;
+            max-width: 320px;
+            line-height: 1.8;
+        }
+        @keyframes rotate-hint {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(90deg); }
+            100% { transform: rotate(90deg); }
+        }
+        @media (max-width: 900px) and (orientation: portrait) {
+            body.force-rotate #rotate-overlay { display: flex; visibility: visible; }
+            body.force-rotate #appContent > *:not(#rotate-overlay) { visibility: hidden; }
+        }
+
+        #img-lightbox.open { display: flex; }
+        #img-lightbox img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        #img-lightbox .lightbox-close {
+            position: fixed;
+            top: 18px;
+            left: 24px;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            background: rgba(255,255,255,0.1);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #img-lightbox .lightbox-close:hover { background: rgba(255,255,255,0.25); }
+
+        .lib-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .lib-search-input {
+            padding: 10px 14px;
+            border: 2px solid #eee;
+            border-radius: 20px;
+            font-family: inherit;
+            font-size: 15px;
+            width: 260px;
+            max-width: 60vw;
+            outline: none;
+            transition: border 0.3s;
+        }
+        .lib-search-input:focus { border-color: #3f9b7a; }
+
+        /* ===== بطاقات فتح المكتبات (الصفحة الرئيسية) ===== */
+        .lib-launch-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        .lib-launch-card {
+            position: relative;
+            border-radius: 22px;
+            padding: 24px 20px 54px;
+            color: #ffffff;
+            cursor: pointer;
+            overflow: hidden;
+            min-height: 168px;
+            display: block;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.14);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            background: linear-gradient(135deg, var(--lc1), var(--lc2));
+        }
+        .lib-launch-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.2);
+        }
+        .lib-launch-card.lib-launch-wide { grid-column: 1 / -1; }
+        .lib-launch-icon {
+            width: 48px; height: 48px;
+            background: rgba(255,255,255,0.22);
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+        .lib-launch-card h3 { margin: 0 0 8px; font-size: 19px; font-weight: 800; line-height: 1.35; }
+        .lib-launch-card p { margin: 0; font-size: 13.5px; line-height: 1.7; color: rgba(255,255,255,0.9); }
+        .lib-launch-arrow {
+            position: absolute; bottom: 18px; left: 20px;
+            font-size: 20px; color: rgba(255,255,255,0.8);
+        }
+        @media (max-width: 420px) {
+            .lib-launch-grid { gap: 10px; }
+            .lib-launch-card { padding: 18px 16px 46px; min-height: 150px; }
+            .lib-launch-card h3 { font-size: 16px; }
+            .lib-launch-card p { font-size: 12.5px; }
+        }
+
+        .lib-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 14px;
+        }
+        @media (max-width: 480px) {
+            .lib-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        }
+        .lib-card {
+            position: relative;
+            overflow: hidden;
+            background: #ffffff;
+            border: 1px solid #f0f0f0;
+            border-radius: 14px;
+            padding: 14px 12px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.045);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .lib-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--lib-c1, #3f9b7a), var(--lib-c2, #66c9a1));
+        }
+        .lib-card:hover {
+            transform: translateY(-6px);
+            border-color: transparent;
+            box-shadow: 0 16px 28px rgba(0,0,0,0.12);
+        }
+        .lib-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; flex-wrap: wrap-reverse; }
+        .lib-icon {
+            flex-shrink: 0;
+            width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px;
+            border-radius: 10px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--lib-c1, #3f9b7a), var(--lib-c2, #66c9a1));
+            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+        }
+        /* بطاقة تحوي صورة غلاف مستخرجة تلقائيًا من الملف */
+        .lib-card.has-thumb { padding: 0; }
+        .lib-thumb { position: relative; width: 100%; height: 84px; overflow: hidden; background: #f1f1f1; }
+        .lib-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+        .lib-card.has-thumb:hover .lib-thumb img { transform: scale(1.06); }
+        .lib-thumb .lib-icon {
+            position: absolute; bottom: -12px; right: 10px;
+            width: 26px; height: 26px; font-size: 12px;
+            border: 2px solid #fff;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+        }
+        .lib-card.has-thumb .lib-card-body { padding: 14px 10px 10px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+        .lib-card .lib-badge-row { display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; flex: 1; }
+        .lib-card .lib-badge {
+            background: #eef8f4;
+            border: 1px solid #cfe8dd;
+            color: #2f7a5f;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+        .lib-card h3 { margin: 4px 0 0; font-size: 13.5px; line-height: 1.4; color: #222; font-weight: 700; }
+        .lib-card .lib-meta { color: #999; font-size: 10.5px; display: flex; align-items: center; gap: 4px; }
+        .lib-card .lib-actions { margin-top: auto; display: flex; gap: 6px; padding-top: 8px; border-top: 1px dashed #f0f0f0; }
+        .lib-card .lib-actions .btn { flex: 1; margin-top: 0; padding: 7px 6px; font-size: 12px; border-radius: 8px; }
+
+        .lib-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+            background: #ffffff;
+            border: 2px dashed #ddd;
+            border-radius: 15px;
+        }
+        .lib-empty .lib-empty-icon { display: block; font-size: 42px; margin-bottom: 10px; opacity: 0.6; }
+        .lib-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            z-index: 200;
+        }
+        .lib-overlay.open { display: flex; }
+        .lib-modal {
+            background: #fff;
+            border-radius: 15px;
+            max-width: 460px;
+            width: 100%;
+            padding: 24px;
+            max-height: 90vh;
+            overflow: auto;
+        }
+        .lib-modal .field { margin-bottom: 14px; }
+        .lib-modal .field label { display: block; font-weight: bold; font-size: 14px; margin-bottom: 6px; color: #444; }
+        .lib-modal .field input[type=text],
+        .lib-modal .field input[type=password] {
+            width: 100%;
+            padding: 9px 10px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 15px;
+            outline: none;
+        }
+        .lib-modal .field input[type=text]:focus,
+        .lib-modal .field input[type=password]:focus { border-color: #3f9b7a; }
+        .lib-modal .field input[type=file] { width: 100%; font-family: inherit; font-size: 14px; }
+        .lib-file-hint { font-size: 13px; color: #999; margin-top: 6px; }
+
+        .lib-viewer {
+            position: fixed; inset: 0;
+            background: #000;
+            display: none;
+            flex-direction: column;
+            z-index: 300;
+        }
+        .lib-viewer.open { display: flex; }
+        .lib-viewer-bar {
+            background: #2f7a5f;
+            color: #fff;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .support-section { margin-top: 14px; font-size: 13.5px; color: #777; }
+        .whatsapp-link { color: #25D366; font-weight: bold; text-decoration: none; }
+        .whatsapp-link:hover { text-decoration: underline; }
+
+        #appContent { display: none; }
+
+        /* ===== بطاقة الدخول (Access Gate) والدفع الإلكتروني ===== */
+        .access-gate {
+            position: fixed; inset: 0;
+            background: linear-gradient(135deg, #3f9b7a, #275c46);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 999;
+        }
+        .access-gate-box {
+            background: #fff;
+            border-radius: 18px;
+            max-width: 420px;
+            width: 100%;
+            padding: 32px 26px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+        .access-gate-logo { font-size: 42px; margin-bottom: 6px; }
+        .access-gate-box h2 { color: #275c46; margin: 0 0 8px; font-size: 22px; }
+        .access-gate-box p { color: #666; font-size: 14.5px; line-height: 1.7; margin: 0 0 18px; }
+        .access-gate-box label { display: block; text-align: right; font-weight: bold; font-size: 14px; color: #444; margin-bottom: 6px; }
+        .access-gate-box input[type=text] {
+            width: 100%; box-sizing: border-box; padding: 12px 14px; border: 2px solid #eee; border-radius: 10px;
+            font-family: inherit; font-size: 17px; text-align: center; letter-spacing: 1px; outline: none; margin-bottom: 12px;
+        }
+        .access-gate-box input[type=text]:focus { border-color: #3f9b7a; }
+        .access-gate-box .btn { width: 100%; box-sizing: border-box; }
+        .access-gate-error {
+            background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 8px;
+            padding: 10px 12px; font-size: 13.5px; margin-top: 10px; margin-bottom: 10px; text-align: right;
+        }
+        .access-gate-sep { color: #999; font-size: 13.5px; margin: 18px 0 10px; position: relative; }
+        .access-gate-code-display {
+            background: #eef8f4; border: 2px dashed #3f9b7a; border-radius: 10px; padding: 14px;
+            font-size: 26px; font-weight: bold; letter-spacing: 2px; color: #275c46; margin: 12px 0; direction: ltr;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- ===== بطاقة الدخول (Access Gate) ===== -->
+<div id="accessGate" class="access-gate">
+    <div class="access-gate-box">
+        <div class="access-gate-logo">🔒</div>
+        <h2>الدخول إلى المحتوى</h2>
+        <p>هذا المحتوى التعليمي (رياضيات الصف الثامن - الفصل الدراسي الأول) متاح للطلاب المشتركين فقط. الرجاء إدخال رمز الدخول الخاص بك للمتابعة.</p>
+        <p style="font-size:12.5px; color:#c45c26; background:#fff3e8; border:1px solid #ffd4b8; border-radius:8px; padding:8px 10px; margin-top:-6px;">
+            ⚠️ تنبيه: استخدم الرمز في الجهاز الذي تريد تستخدم هذا الموقع فيه فقط، لأنه يعمل لمرّة واحدة فقط ولا يمكن استخدامه على أكثر من جهاز.
+        </p>
+
+        <div id="gateCodeView">
+            <label>رمز الدخول</label>
+            <input type="text" id="gateCodeInput" placeholder="مثال: MATH-XXXXXX" onkeydown="if(event.key==='Enter'){redeemAccessCode();}">
+            <button class="btn" id="gateCodeSubmitBtn" onclick="redeemAccessCode()">دخول</button>
+            <div id="gateCodeError" class="access-gate-error" style="display:none;"></div>
+            <div class="access-gate-sep">ليس لديك رمز؟</div>
+            <button class="btn" style="background:#d15b40;" onclick="openPaymentModal()">💳 اشترك الآن للحصول على رمز</button>
+        </div>
+
+        <div id="gateVerifying" style="display:none;">
+            <p>⏳ جارٍ التحقق من عملية الدفع، الرجاء الانتظار ولا تُغلق الصفحة...</p>
+        </div>
+
+        <div id="gateCodeResult" style="display:none;">
+            <p>✅ تم الدفع بنجاح! هذا هو رمز الدخول الخاص بك:</p>
+            <div class="access-gate-code-display" id="gateGeneratedCode"></div>
+            <div style="background:#fff3e8; border:1px solid #ffd4b8; border-radius:10px; padding:10px 12px; margin:12px 0; text-align:right;">
+                <p style="font-size:13px;color:#c45c26; margin:0; line-height:1.8;">
+                    ⚠️ تنبيه هام: استخدم الرمز في الجهاز الذي تريد تستخدم هذا الموقع فيه فقط، لأنه يعمل لمرّة واحدة فقط ولن يعمل بعدها على أي جهاز آخر. احتفظ به في مكان آمن ولا تشاركه مع أحد.
+                </p>
+            </div>
+            <button class="btn" onclick="enterWithGeneratedCode()">المتابعة إلى المحتوى</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== نافذة الدفع الإلكتروني (ثواني) ===== -->
+<div class="lib-overlay" id="paymentOverlay" style="z-index:1000;">
+    <div class="lib-modal" style="max-width:380px; text-align:center;">
+        <h3 style="margin-top:0;color:#3f9b7a;">الاشتراك والدفع الإلكتروني</h3>
+        <p style="font-size:14.5px;color:#555; line-height:1.8;">اشتراك محتوى رياضيات الصف الثامن - الفصل الدراسي الأول<br>السعر: <b id="paymentPriceLabel">6.000 ر.ع / 6 أشهر</b></p>
+        <p style="font-size:13px;color:#c45c26; background:#fff3e8; border:1px solid #ffd4b8; border-radius:10px; padding:10px 12px; line-height:1.8;">
+            ⚠️ استخدم الرمز في الجهاز الذي تريد تستخدم هذا الموقع فيه فقط، لأنه يعمل لمرّة واحدة فقط ولا يعمل على أكثر من جهاز.
+        </p>
+        <div id="paymentError" class="access-gate-error" style="display:none;"></div>
+        <button class="btn" id="payNowBtn" onclick="startThawaniPayment()">الدفع عبر ثواني (فيزا / ماستركارد)</button>
+        <button class="btn btn-back" onclick="closePaymentModal()">إلغاء</button>
+    </div>
+</div>
+
+<div id="appContent">
+    <div id="rotate-overlay">
+        <div class="rotate-icon">📱</div>
+        <p>الرجاء تدوير جهازك إلى الوضع الأفقي للاستمتاع بتجربة أفضل</p>
+    </div>
+
+<div id="login-section" style="display:none;">
+    <div class="login-card">
+        <h2 style="color: #3f9b7a; margin-top: 0;">كتاب اكتروني ذكي</h2>
+
+        <div style="background-color: #eef8f4; border: 2px solid #3f9b7a; border-radius: 12px; padding: 15px 18px; margin-bottom: 15px; text-align: right;">
+            <p style="margin: 0 0 6px 0; font-weight: bold; color: #3f9b7a; font-size: 16px;">✨ مميزات الكتاب الإلكتروني</p>
+            <p style="margin: 0; color: #555; font-size: 14.5px; line-height: 1.9;">
+                يحتوي الكتاب على أكثر من <b>2500 سؤال</b> مع التصحيح والحلول خطوة بخطوة، بالإضافة إلى اختبارات قصيرة، واختبارات نهائية، وأنشطة وألعاب تفاعلية مرتبطة بالمنهج، كما يحتوي على <b>مقاطع مرئية</b>، و<b>ملخصات</b>، و<b>حلول كتاب النشاط</b>.
+            </p>
+        </div>
+
+        <div style="background-color: #fff8ec; border: 2px solid #e8b84b; border-radius: 12px; padding: 15px 18px; margin-bottom: 18px; text-align: right;">
+            <p style="margin: 0 0 6px 0; font-weight: bold; color: #3f9b7a; font-size: 16px;">📌 الاشتراك في الكتاب</p>
+            <p style="margin: 0; color: #555; font-size: 14.5px; line-height: 1.7;">
+                رسوم الاشتراك <b>5 ريال عماني</b> لمدة <b>6 أشهر</b>.
+                للاشتراك، يرجى التواصل مع أ. قحطان الرحبي عبر واتساب أدناه للحصول على كودك الخاص.
+            </p>
+        </div>
+
+        <input type="password" id="password-input" placeholder="أدخل كودك الخاص" onkeydown="if(event.key==='Enter'){checkPassword();}">
+        <button class="btn" onclick="checkPassword()" style="width: 100%;">دخول للمنصة</button>
+        <p id="error-msg" style="color: black; font-size: 15px; margin-top: 10px;"></p>
+        <div class="support-section">
+            <span>للدعم الفني والتواصل: أ.قحطان الرحبي</span>
+            <br>
+            <a href="https://wa.me/96897787130" target="_blank" class="whatsapp-link">97787130 - تواصل معنا عبر واتساب</a>
+        </div>
+    </div>
+</div>
+
+<div id="toc-section" style="display: block;">
+    <div style="text-align:center; color:#3f9b7a; font-size:20px; font-weight:bold; margin-bottom:15px;">الصف الثامن - مادة الرياضيات - الفصل الدراسي الأول</div>
+    <div class="lib-launch-grid">
+        <div class="lib-launch-card" style="--lc1:#f0834d; --lc2:#c8432b;" onclick="openLibrarySection()">
+            <div class="lib-launch-icon">📝</div>
+            <h3>مكتبة الاختبارات القصيرة</h3>
+            <p>اختبارات سريعة لكل درس لتقييم الفهم أولاً بأول</p>
+            <div class="lib-launch-arrow">←</div>
+        </div>
+        <div class="lib-launch-card" style="--lc1:#4aa9d4; --lc2:#1f6f95;" onclick="openActSection()">
+            <div class="lib-launch-icon">🎮</div>
+            <h3>مكتبة الأنشطة والألعاب</h3>
+            <p>أنشطة تفاعلية وألعاب تعليمية ممتعة لترسيخ المفاهيم</p>
+            <div class="lib-launch-arrow">←</div>
+        </div>
+        <div class="lib-launch-card lib-launch-wide" style="--lc1:#9b6fd0; --lc2:#5e3d94;" onclick="openFinalSection()">
+            <div class="lib-launch-icon">📄</div>
+            <h3>مكتبة الاختبارات النهائية</h3>
+            <p>اختبارات شاملة ومراجعات عامة للفصل الدراسي</p>
+            <div class="lib-launch-arrow">←</div>
+        </div>
+    </div>
+
+    <div class="toc-container">
+        <div class="column">
+            <div class="unit-title">الوحدة الأولى: الأعداد الصحيحة والقُوى والجذور</div>
+            <ul>
+                <li onclick="openLesson('1-1', '١-١ الأعداد المُوجَّهة')"><span>١-١ الأعداد المُوجَّهة</span><span class="dots"></span><span class="page-num">١٦</span></li>
+                <li onclick="openLesson('1-2', '٢-١ الجذورُ التربيعيَّة والجذورُ التكعيبيَّة')"><span>٢-١ الجذورُ التربيعيَّة والجذورُ التكعيبيَّة</span><span class="dots"></span><span class="page-num">٢٠</span></li>
+                <li onclick="openLesson('1-3', '٣-١ الأُسُس')"><span>٣-١ الأُسُس</span><span class="dots"></span><span class="page-num">٢٢</span></li>
+                <li onclick="openLesson('1-4', '٤-١ استخدامُ الأُسُس')"><span>٤-١ استخدامُ الأُسُس</span><span class="dots"></span><span class="page-num">٢٤</span></li>
+                <li onclick="openLesson('rev-1', 'تمارين ومسائل عامة - الوحدة الأولى')"><span>تمارين ومسائل عامة</span><span class="dots"></span><span class="page-num">٢٧</span></li>
+            </ul>
+
+            <div class="unit-title">الوحدة الثانية: القيمة المكانية والترتيب والتقريب</div>
+            <ul>
+                <li onclick="openLesson('2-1', '١-٢ ضرب الكسور العشريَّة وقسمتها ذهنيًا')"><span>١-٢ ضرب الكسور العشريَّة وقسمتها ذهنيًا</span><span class="dots"></span><span class="page-num">٣١</span></li>
+                <li onclick="openLesson('2-2', '٢-٢ الضرب في قوى العدد ١٠ والقسمة عليها')"><span>٢-٢ الضرب في قوى العدد ١٠ والقسمة عليها</span><span class="dots"></span><span class="page-num">٣٥</span></li>
+                <li onclick="openLesson('2-3', '٣-٢ التقريب')"><span>٣-٢ التقريب</span><span class="dots"></span><span class="page-num">٣٨</span></li>
+                <li onclick="openLesson('2-4', '٤-٢ ترتيبُ العمليَّات')"><span>٤-٢ ترتيبُ العمليَّات</span><span class="dots"></span><span class="page-num">٤٢</span></li>
+                <li onclick="openLesson('rev-2', 'تمارين ومسائل عامة - الوحدة الثانية')"><span>تمارين ومسائل عامة</span><span class="dots"></span><span class="page-num">٤٦</span></li>
+            </ul>
+
+            <div class="unit-title">الوحدة الثالثة: الشبكات والزَّوايا</div>
+            <ul>
+                <li onclick="openLesson('3-1', '١-٣ رسمُ شبكاتٍ للمُجسَّمات')"><span>١-٣ رسمُ شبكاتٍ للمُجسَّمات</span><span class="dots"></span><span class="page-num">٤٩</span></li>
+                <li onclick="openLesson('3-2', '٢-٣ شرحُ خصائصِ الزَّوايا')"><span>٢-٣ شرحُ خصائصِ الزَّوايا</span><span class="dots"></span><span class="page-num">٥٢</span></li>
+                <li onclick="openLesson('3-3', '٣-٣ حلُّ مسائل الزَّوايا')"><span>٣-٣ حلُّ مسائل الزَّوايا</span><span class="dots"></span><span class="page-num">٥٦</span></li>
+                <li onclick="openLesson('rev-3', 'تمارين ومسائل عامة - الوحدة الثالثة')"><span>تمارين ومسائل عامة</span><span class="dots"></span><span class="page-num">٦٠</span></li>
+            </ul>
+
+            <div class="unit-title">الوحدة الرابعة: الكسور</div>
+            <ul>
+                <li onclick="openLesson('4-1', '١-٤ كتابةُ الكسرِ في أبسطِ صورةٍ')"><span>١-٤ كتابةُ الكسرِ في أبسطِ صورةٍ</span><span class="dots"></span><span class="page-num">٦٢</span></li>
+                <li onclick="openLesson('4-2', '٢-٤ جمعُ الكسور وطرحُها')"><span>٢-٤ جمعُ الكسور وطرحُها</span><span class="dots"></span><span class="page-num">٦٣</span></li>
+                <li onclick="openLesson('4-3', '٣-٤ ضرب الكسور')"><span>٣-٤ ضرب الكسور</span><span class="dots"></span><span class="page-num">٦٦</span></li>
+                <li onclick="openLesson('4-4', '٤-٤ قسمةُ الكسورِ')"><span>٤-٤ قسمةُ الكسورِ</span><span class="dots"></span><span class="page-num">٦٩</span></li>
+                <li onclick="openLesson('4-5', '٥-٤ التعامُل مع الكسور ذهنيًا')"><span>٥-٤ التعامُل مع الكسور ذهنيًا</span><span class="dots"></span><span class="page-num">٧٢</span></li>
+                <li onclick="openLesson('rev-4', 'تمارين ومسائل عامة - الوحدة الرابعة')"><span>تمارين ومسائل عامة</span><span class="dots"></span><span class="page-num">٧٥</span></li>
+            </ul>
+        </div>
+
+        <div class="column">
+            <div class="unit-title">الوحدة الخامسة: المُعادلاتُ والعباراتُ الجَبريَّة والصيغ</div>
+            <ul>
+                <li onclick="openLesson('5-1', '١-٥ كتابةُ المُعادلاتِ وحلُّها')"><span>١-٥ كتابةُ المُعادلاتِ وحلُّها</span><span class="dots"></span><span class="page-num">٧٨</span></li>
+                <li onclick="openLesson('5-2', '٢-٥ تبسيطُ العباراتِ الجَبريَّة')"><span>٢-٥ تبسيطُ العباراتِ الجَبريَّة</span><span class="dots"></span><span class="page-num">٨٠</span></li>
+                <li onclick="openLesson('5-3', '٣-٥ كتابةُ العباراتِ الجَبريَّة')"><span>٣-٥ كتابةُ العباراتِ الجَبريَّة</span><span class="dots"></span><span class="page-num">٨٢</span></li>
+                <li onclick="openLesson('5-4', '٤-٥ التعويض في العباراتِ الجبرية')"><span>٤-٥ التعويض في العباراتِ الجبرية</span><span class="dots"></span><span class="page-num">٨٥</span></li>
+                <li onclick="openLesson('5-5', '٥-٥ الصيغ واستخدامُها')"><span>٥-٥ الصيغ واستخدامُها</span><span class="dots"></span><span class="page-num">٨٧</span></li>
+                <li onclick="openLesson('5-6', '٦-٥ التحليلُ إلى عوامل')"><span>٦-٥ التحليلُ إلى عوامل</span><span class="dots"></span><span class="page-num">٩٠</span></li>
+                <li onclick="openLesson('5-7', '٧-٥ جمعُ الكسورِ الجَبريَّةِ وطرحُها')"><span>٧-٥ جمعُ الكسورِ الجَبريَّةِ وطرحُها</span><span class="dots"></span><span class="page-num">٩٢</span></li>
+                <li onclick="openLesson('5-8', '٨-٥ فكُّ ناتجِ عبارتين خطيَّتين')"><span>٨-٥ فكُّ ناتجِ عبارتين خطيَّتين</span><span class="dots"></span><span class="page-num">٩٥</span></li>
+                <li onclick="openLesson('rev-5', 'تمارين ومسائل عامة - الوحدة الخامسة')"><span>تمارين ومسائل عامة</span><span class="dots"></span><span class="page-num">٩٨</span></li>
+            </ul>
+
+            <div class="unit-title">الوحدة السادسة: المساحة والمُحيط والحجم</div>
+            <ul>
+                <li onclick="openLesson('6-1', '١-٦ تحويلُ وحداتِ المساحة والحجم')"><span>١-٦ تحويلُ وحداتِ المساحة والحجم</span><span class="dots"></span><span class="page-num">١٠١</span></li>
+                <li onclick="openLesson('6-2', '٢-٦ حلُّ مسائلِ الدائرة')"><span>٢-٦ حلُّ مسائلِ الدائرة</span><span class="dots"></span><span class="page-num">١٠٥</span></li>
+                <li onclick="openLesson('6-3', '٣-٦ العمليَّات الحسابيَّة المتعلِّقة بالمنشور والأسطوانة')"><span>٣-٦ العمليَّات الحسابيَّة المتعلِّقة بالمنشور والأسطوانة</span><span class="dots"></span><span class="page-num">١٠٨</span></li>
+                <li onclick="openLesson('rev-6', 'تمارين ومسائل عامة - الوحدة السادسة')"><span>تمارين ومسائل عامة</span><span class="dots"></span><span class="page-num">١١٣</span></li>
+            </ul>
+
+            <div class="unit-title">الوحدة السابعة: الاحتمالات</div>
+            <ul>
+                <li onclick="openLesson('7-1', '١-٧ احتمالُ عدم حدوثِ نتيجةٍ ما')"><span>١-٧ احتمالُ عدم حدوثِ نتيجةٍ ما</span><span class="dots"></span><span class="page-num">١١٦</span></li>
+                <li onclick="openLesson('7-2', '٢-٧ نتائج الاحتمالات المُرجَّحة بالتساوي')"><span>٢-٧ نتائج الاحتمالات المُرجَّحة بالتساوي</span><span class="dots"></span><span class="page-num">١١٨</span></li>
+                <li onclick="openLesson('7-3', '٣-٧ كتابةُ قائمةٍ بالنتائج المُحتملة (فضاء الإمكانات)')"><span>٣-٧ كتابةُ قائمةٍ بالنتائج المُحتملة (فضاء الإمكانات)</span><span class="dots"></span><span class="page-num">١٢١</span></li>
+                <li onclick="openLesson('7-4', '٤-٧ الاحتمالات التجريبيَّة والنظريَّة')"><span>٤-٧ الاحتمالات التجريبيَّة والنظريَّة</span><span class="dots"></span><span class="page-num">١٢٤</span></li>
+                <li onclick="openLesson('rev-7', 'تمارين ومسائل عامة - الوحدة السابعة')"><span>تمارين ومسائل عامة</span><span class="dots"></span><span class="page-num">١٢٨</span></li>
+            </ul>
+
+            <div class="unit-title">الوحدة الثامنة: النسب المئويَّة</div>
+            <ul>
+                <li onclick="openLesson('8-1', '١-٨ استخدامُ الطرقِ الذهنيَّة')"><span>١-٨ استخدامُ الطرقِ الذهنيَّة</span><span class="dots"></span><span class="page-num">١٣١</span></li>
+                <li onclick="openLesson('8-2', '٢-٨ مقارنةُ الكميَّاتِ المُختلفةِ')"><span>٢-٨ مقارنةُ الكميَّاتِ المُختلفةِ</span><span class="dots"></span><span class="page-num">١٣٣</span></li>
+                <li onclick="openLesson('8-3', '٣-٨ تغييراتُ النسبةِ المئويَّةِ')"><span>٣-٨ تغييراتُ النسبةِ المئويَّةِ</span><span class="dots"></span><span class="page-num">١٣٥</span></li>
+                <li onclick="openLesson('8-4', '٤-٨ أمثلةٌ عمليَّةٌ')"><span>٤-٨ أمثلةٌ عمليَّةٌ</span><span class="dots"></span><span class="page-num">١٣٧</span></li>
+                <li onclick="openLesson('rev-8', 'تمارين ومسائل عامة - الوحدة الثامنة')"><span>تمارين ومسائل عامة</span><span class="dots"></span><span class="page-num">١٤٠</span></li>
+                <li onclick="openLesson('end-review', 'مراجعة نهاية الفصل الدراسي')"><span>مراجعة نهاية الفصل الدراسي</span><span class="dots"></span><span class="page-num">١٤٢</span></li>
+                <li onclick="openLesson('glossary', 'قاموس المصطلحات')"><span>قاموس المصطلحات</span><span class="dots"></span><span class="page-num">١٤٥</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="library-section" style="display: none; max-width: 1000px; margin: 20px auto;">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; border-bottom: 3px solid #e0e0e0; margin-bottom: 30px; padding-bottom: 10px;">
+        <div class="main-header" style="border-bottom:none; margin-bottom:0; padding-bottom:0; font-size:30px;">📝 مكتبة اختبارات قصيرة</div>
+        <button class="btn btn-back" onclick="goBackFromLibrary()" style="margin-top:0;">🔙 عودة للفهرس</button>
+    </div>
+
+    <div class="lib-toolbar">
+        <input type="text" id="libSearchInput" class="lib-search-input" placeholder="ابحث عن اختبار..." oninput="renderLibGrid()">
+        <div style="display:flex; gap:10px;">
+            <button class="btn" id="libTeacherToggle" onclick="handleLibTeacherToggle()" style="margin-top:0;">دخول المعلم</button>
+            <button class="btn" id="libAddBtn" onclick="openLibAddModal()" style="display:none; margin-top:0; background-color:#d15b40;">+ إضافة اختبار</button>
+        </div>
+    </div>
+
+    <div id="libStatusMsg" style="text-align:center; color:#777; padding:20px;">جارٍ التحميل...</div>
+    <div id="libGrid" class="lib-grid" style="display:none;"></div>
+    <div id="libEmptyMsg" class="lib-empty" style="display:none;">لا توجد اختبارات بعد.</div>
+</div>
+
+<div class="lib-overlay" id="libLoginOverlay">
+    <div class="lib-modal" style="max-width:360px;">
+        <h2 style="color:#3f9b7a; margin-top:0;">دخول المعلم</h2>
+        <div class="field">
+            <label>البريد الإلكتروني</label>
+            <input type="text" id="libLoginEmail" placeholder="teacher@example.com">
+        </div>
+        <div class="field">
+            <label>كلمة المرور</label>
+            <input type="password" id="libLoginPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter'){submitLibLogin();}">
+        </div>
+        <div class="error-msg" id="libLoginError" style="color:#d6453b; font-size:13px; margin-top:8px; display:none;"></div>
+        <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:20px;">
+            <button class="btn btn-back" onclick="closeLibLoginModal()" style="margin-top:0;">إلغاء</button>
+            <button class="btn" id="libLoginSubmitBtn" onclick="submitLibLogin()" style="margin-top:0;">دخول</button>
+        </div>
+    </div>
+</div>
+
+<div class="lib-overlay" id="libAddOverlay">
+    <div class="lib-modal">
+        <h2 style="color:#3f9b7a; margin-top:0;">إضافة اختبار جديد</h2>
+        <div class="field">
+            <label>عنوان الاختبار</label>
+            <input type="text" id="libQuizTitle" placeholder="مثال: اختبار قصير - الأعداد الصحيحة">
+        </div>
+        <div class="field">
+            <label>الوحدة / الموضوع (اختياري)</label>
+            <input type="text" id="libQuizSubject" placeholder="مثال: الأعداد الصحيحة والقوى والجذور">
+        </div>
+        <div class="field">
+            <label>ملف الاختبار (HTML)</label>
+            <input type="file" id="libQuizFile" accept=".html,.htm">
+            <div class="lib-file-hint" id="libThumbStatus" style="display:none; color:#3f9b7a; font-weight:bold;"></div>
+            <div class="lib-file-hint">اختر ملف HTML من جهازك</div>
+        </div>
+        <div class="error-msg" id="libAddError" style="color:#d6453b; font-size:13px; margin-top:8px; display:none;"></div>
+        <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:20px;">
+            <button class="btn btn-back" onclick="closeLibAddModal()" style="margin-top:0;">إلغاء</button>
+            <button class="btn" onclick="saveLibQuiz()" style="margin-top:0;">حفظ</button>
+        </div>
+    </div>
+</div>
+
+<div class="lib-viewer" id="libViewer">
+    <div class="lib-viewer-bar">
+        <strong id="libViewerTitle"></strong>
+        <div style="display:flex; gap:8px;">
+            <button class="btn btn-back" style="margin-top:0; padding:6px 14px; font-size:14px;" onclick="closeLibViewer()">إغلاق ✕</button>
+        </div>
+    </div>
+    <iframe id="libViewerFrame" style="flex:1; width:100%; border:none; background:#fff;"></iframe>
+</div>
+
+<div id="final-library-section" style="display: none; max-width: 1000px; margin: 20px auto;">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; border-bottom: 3px solid #e0e0e0; margin-bottom: 30px; padding-bottom: 10px;">
+        <div class="main-header" style="border-bottom:none; margin-bottom:0; padding-bottom:0; font-size:30px;">📄 مكتبة الاختبارات النهائية</div>
+        <button class="btn btn-back" onclick="goBackFromFinal()" style="margin-top:0;">🔙 عودة للفهرس</button>
+    </div>
+
+    <div class="lib-toolbar">
+        <input type="text" id="finSearchInput" class="lib-search-input" placeholder="ابحث عن اختبار..." oninput="renderFinGrid()">
+        <div style="display:flex; gap:10px;">
+            <button class="btn" id="finTeacherToggle" onclick="handleLibTeacherToggle()" style="margin-top:0;">دخول المعلم</button>
+            <button class="btn" id="finAddBtn" onclick="openFinAddModal()" style="display:none; margin-top:0; background-color:#6a4a9b;">+ إضافة اختبار</button>
+        </div>
+    </div>
+
+    <div id="finStatusMsg" style="text-align:center; color:#777; padding:20px;">جارٍ التحميل...</div>
+    <div id="finGrid" class="lib-grid" style="display:none;"></div>
+    <div id="finEmptyMsg" class="lib-empty" style="display:none;">لا توجد اختبارات بعد.</div>
+</div>
+
+<div class="lib-overlay" id="finAddOverlay">
+    <div class="lib-modal">
+        <h2 style="color:#6a4a9b; margin-top:0;">إضافة اختبار جديد</h2>
+        <div class="field">
+            <label>عنوان الاختبار</label>
+            <input type="text" id="finQuizTitle" placeholder="مثال: الاختبار النهائي - الفصل الأول">
+        </div>
+        <div class="field">
+            <label>الوحدة / الموضوع (اختياري)</label>
+            <input type="text" id="finQuizSubject" placeholder="مثال: مراجعة عامة">
+        </div>
+        <div class="field">
+            <label>ملف الاختبار (HTML)</label>
+            <input type="file" id="finQuizFile" accept=".html,.htm">
+            <div class="lib-file-hint" id="finThumbStatus" style="display:none; color:#6a4a9b; font-weight:bold;"></div>
+            <div class="lib-file-hint">اختر ملف HTML من جهازك</div>
+        </div>
+        <div class="error-msg" id="finAddError" style="color:#d6453b; font-size:13px; margin-top:8px; display:none;"></div>
+        <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:20px;">
+            <button class="btn btn-back" onclick="closeFinAddModal()" style="margin-top:0;">إلغاء</button>
+            <button class="btn" onclick="saveFinQuiz()" style="margin-top:0; background-color:#6a4a9b;">حفظ</button>
+        </div>
+    </div>
+</div>
+
+<div class="lib-viewer" id="finViewer">
+    <div class="lib-viewer-bar" style="background-color:#4a2f6b;">
+        <strong id="finViewerTitle"></strong>
+        <div style="display:flex; gap:8px;">
+            <button class="btn btn-back" style="margin-top:0; padding:6px 14px; font-size:14px;" onclick="closeFinViewer()">إغلاق ✕</button>
+        </div>
+    </div>
+    <iframe id="finViewerFrame" style="flex:1; width:100%; border:none; background:#fff;"></iframe>
+</div>
+
+<div id="act-library-section" style="display: none; max-width: 1000px; margin: 20px auto;">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; border-bottom: 3px solid #e0e0e0; margin-bottom: 30px; padding-bottom: 10px;">
+        <div class="main-header" style="border-bottom:none; margin-bottom:0; padding-bottom:0; font-size:30px;">🎮 مكتبة الأنشطة والألعاب</div>
+        <button class="btn btn-back" onclick="goBackFromAct()" style="margin-top:0;">🔙 عودة للفهرس</button>
+    </div>
+
+    <div class="lib-toolbar">
+        <input type="text" id="actSearchInput" class="lib-search-input" placeholder="ابحث عن نشاط أو لعبة..." oninput="renderActGrid()">
+        <div style="display:flex; gap:10px;">
+            <button class="btn" id="actTeacherToggle" onclick="handleLibTeacherToggle()" style="margin-top:0;">دخول المعلم</button>
+            <button class="btn" id="actAddBtn" onclick="openActAddModal()" style="display:none; margin-top:0; background-color:#2e86ab;">+ إضافة نشاط</button>
+        </div>
+    </div>
+
+    <div id="actStatusMsg" style="text-align:center; color:#777; padding:20px;">جارٍ التحميل...</div>
+    <div id="actGrid" class="lib-grid" style="display:none;"></div>
+    <div id="actEmptyMsg" class="lib-empty" style="display:none;">لا توجد أنشطة بعد.</div>
+</div>
+
+<div class="lib-overlay" id="actAddOverlay">
+    <div class="lib-modal">
+        <h2 style="color:#2e86ab; margin-top:0;">إضافة نشاط أو لعبة جديدة</h2>
+        <div class="field">
+            <label>عنوان النشاط</label>
+            <input type="text" id="actQuizTitle" placeholder="مثال: لعبة مراجعة - الأعداد الصحيحة">
+        </div>
+        <div class="field">
+            <label>الوحدة / الموضوع (اختياري)</label>
+            <input type="text" id="actQuizSubject" placeholder="مثال: نشاط تفاعلي">
+        </div>
+        <div class="field">
+            <label>نوع النشاط</label>
+            <div style="display:flex; gap:18px; margin-top:8px;">
+                <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-weight:normal;">
+                    <input type="radio" name="actSourceType" id="actSourceTypeFile" value="file" checked onchange="actToggleSourceType()"> رفع ملف HTML
+                </label>
+                <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-weight:normal;">
+                    <input type="radio" name="actSourceType" id="actSourceTypeLink" value="link" onchange="actToggleSourceType()"> رابط صفحة ويب
+                </label>
+            </div>
+        </div>
+        <div class="field" id="actFileFieldWrap">
+            <label>ملف النشاط (HTML)</label>
+            <input type="file" id="actQuizFile" accept=".html,.htm">
+            <div class="lib-file-hint" id="actThumbStatus" style="display:none; color:#2e86ab; font-weight:bold;"></div>
+            <div class="lib-file-hint">اختر ملف HTML من جهازك</div>
+        </div>
+        <div class="field" id="actLinkFieldWrap" style="display:none;">
+            <label>رابط الصفحة التفاعلية</label>
+            <input type="text" id="actQuizLink" placeholder="https://example.com/activity">
+            <div class="lib-file-hint">تُفتح الصفحة داخل الموقع مباشرة. ملاحظة: بعض المواقع تمنع فتح صفحاتها داخل مواقع أخرى، وفي هذه الحالة يمكن فتحها في نافذة جديدة من زر "فتح في نافذة جديدة".</div>
+        </div>
+        <div class="error-msg" id="actAddError" style="color:#d6453b; font-size:13px; margin-top:8px; display:none;"></div>
+        <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:20px;">
+            <button class="btn btn-back" onclick="closeActAddModal()" style="margin-top:0;">إلغاء</button>
+            <button class="btn" onclick="saveActItem()" style="margin-top:0; background-color:#2e86ab;">حفظ</button>
+        </div>
+    </div>
+</div>
+
+<div class="lib-viewer" id="actViewer">
+    <div class="lib-viewer-bar" style="background-color:#215f79;">
+        <strong id="actViewerTitle"></strong>
+        <div style="display:flex; gap:8px;">
+            <button class="btn" id="actOpenNewTabBtn" style="margin-top:0; padding:6px 14px; font-size:14px; display:none;" onclick="openActInNewTab()">فتح في نافذة جديدة</button>
+            <button class="btn btn-back" style="margin-top:0; padding:6px 14px; font-size:14px;" onclick="closeActViewer()">إغلاق ✕</button>
+        </div>
+    </div>
+    <iframe id="actViewerFrame" style="flex:1; width:100%; border:none; background:#fff;"></iframe>
+</div>
+
+<div id="lesson-section">
+    <div class="lesson-header" id="lesson-title">عنوان الدرس</div>
+
+    <div class="sections-grid">
+        <div class="section-card active" id="card-video" onclick="switchTab('video')">
+            <span class="icon">🎥</span>
+            <span class="title">المقطع المرئي</span>
+        </div>
+        <div class="section-card" id="card-summary" onclick="switchTab('summary')">
+            <span class="icon">🖼️</span>
+            <span class="title">ملخص الدرس</span>
+        </div>
+        <div class="section-card" id="card-quiz" onclick="switchTab('quiz')">
+            <span class="icon">📝</span>
+            <span class="title">اختبار قصير</span>
+        </div>
+        <div class="section-card" id="card-hard" onclick="switchTab('hard')">
+            <span class="icon">🔥</span>
+            <span class="title">أسئلة تحدي</span>
+        </div>
+        <div class="section-card" id="card-activity" onclick="switchTab('activity')">
+            <span class="icon">📘</span>
+            <span class="title">حلول أسئلة كتاب النشاط</span>
+        </div>
+    </div>
+
+    <div id="tab-video" class="tab-content active">
+        <p style="color: #666; margin-bottom: 15px; font-weight: bold; font-size: 18px;">شرح تفصيلي لدرس: <span id="video-lesson-name" style="color:#d15b40;"></span></p>
+        <div class="video-container" id="video-container"></div>
+    </div>
+
+    <div id="tab-summary" class="tab-content">
+        <h3 style="color: #3f9b7a; margin-top: 0;">الخلاصة الذهبية للدرس</h3>
+        <p style="margin-bottom: 20px; color: #555;">مراجعة سريعة لأهم القوانين والمفاهيم قبل البدء في حل الأسئلة.</p>
+        <div class="summary-img-container" id="summary-container" style="text-align: center;"></div>
+    </div>
+
+    <div id="tab-quiz" class="tab-content">
+        <h3 style="color: #3f9b7a; margin-top: 0;">اختبر معلوماتك الأساسية</h3>
+        <div id="quiz-content"></div>
+        <button class="btn" id="submit-btn" onclick="checkAnswers('quiz')">إرسال الإجابات</button>
+        <div id="result-box"></div>
+    </div>
+
+    <div id="tab-hard" class="tab-content">
+        <h3 style="color: #d15b40; margin-top: 0;">هل أنت مستعد للتحدي؟</h3>
+        <div id="hard-quiz-content"></div>
+        <button class="btn" id="submit-hard-btn" onclick="checkAnswers('hard')" style="background-color: #d15b40;">إرسال الإجابات (تحدي)</button>
+        <div id="result-box-hard"></div>
+    </div>
+
+    <div id="tab-activity" class="tab-content">
+        <h3 style="color: #6a4a9b; margin-top: 0;">حلول أسئلة كتاب النشاط</h3>
+        <p style="margin-bottom: 20px; color: #555;">صور الحلول النموذجية لأسئلة كتاب النشاط الخاصة بهذا الدرس.</p>
+        <div id="activity-container"></div>
+    </div>
+
+    <div style="margin-top: 20px; text-align: left;">
+        <button class="btn btn-back" onclick="goBack()">🔙 عودة للفهرس</button>
+    </div>
+</div>
+
+<div id="img-lightbox" onclick="closeImgLightbox()">
+    <span class="lightbox-close" onclick="closeImgLightbox()">&times;</span>
+    <img id="img-lightbox-src" src="" alt="عرض مكبّر">
+</div>
+
+</div><!-- /#appContent -->
+
+<script type="module">
+    // ==========================================================
+    // إعداد Firebase — مشروع مشترك grade7-b8229 (خاص بكل الصفوف)
+    // ==========================================================
+    const GRADE = 'g8'; // ← الصف المرتبط بهذا الملف. غيّره فقط عند نسخ الملف لصف آخر
+    let db = null, auth = null, functionsInstance = null;
+    let doc, getDoc, collection, getDocs, addDoc, deleteDoc, runTransaction;
+    let signInWithEmailAndPassword, signOut, onAuthStateChanged, httpsCallable;
+    let firebaseReady = false;
+
+    async function initFirebase() {
+        try {
+            const [appMod, fsMod, authMod, fnMod] = await Promise.all([
+                import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"),
+                import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"),
+                import("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"),
+                import("https://www.gstatic.com/firebasejs/10.12.2/firebase-functions.js")
+            ]);
+
+            ({ doc, getDoc, collection, getDocs, addDoc, deleteDoc, runTransaction } = fsMod);
+            ({ signInWithEmailAndPassword, signOut, onAuthStateChanged } = authMod);
+            ({ httpsCallable } = fnMod);
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyC43IY_z4w0lN0VtWtpc1WhT25eUNNmHkk",
+                authDomain: "grade7-b8229.firebaseapp.com",
+                projectId: "grade7-b8229",
+                storageBucket: "grade7-b8229.firebasestorage.app",
+                messagingSenderId: "212787031156",
+                appId: "1:212787031156:web:22fa361becdcf472a67521"
+            };
+
+            const firebaseApp = appMod.initializeApp(firebaseConfig);
+            db = fsMod.getFirestore(firebaseApp);
+            auth = authMod.getAuth(firebaseApp);
+            functionsInstance = fnMod.getFunctions(firebaseApp, "us-central1");
+            firebaseReady = true;
+            registerAuthListener();
+        } catch (err) {
+            console.error('تعذّر الاتصال بخدمة المكتبات (Firebase).', err);
+            firebaseReady = false;
+        }
+    }
+
+    // ==========================================================
+    // === بطاقة الدخول والدفع الإلكتروني عبر ثواني (Thawani) ===
+    // ==========================================================
+    const ACCESS_STORAGE_KEY = 'mathG8_accessCode';
+    let createThawaniSessionFn = null;
+    let verifyThawaniPaymentFn = null;
+
+    function showAppContent() {
+        document.getElementById('accessGate').style.display = 'none';
+        document.getElementById('appContent').style.display = 'block';
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('toc-section').style.display = 'block';
+        document.body.classList.add('force-rotate');
+
+        // محاولة قفل الشاشة على الوضع الأفقي تلقائياً (تعمل فقط في بعض المتصفحات أو عند تثبيت الصفحة كتطبيق)
+        if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock('landscape').catch(() => {});
+        }
+    }
+
+    function gateShowError(elId, msg) {
+        const el = document.getElementById(elId);
+        el.innerText = msg;
+        el.style.display = 'block';
+    }
+
+    async function initAccessGate() {
+        if (!firebaseReady) {
+            gateShowError('gateCodeError', 'تعذّر الاتصال بالخادم. تحقّق من الإنترنت وأعد تحميل الصفحة.');
+            return;
+        }
+        createThawaniSessionFn = httpsCallable(functionsInstance, 'createThawaniSession');
+        verifyThawaniPaymentFn = httpsCallable(functionsInstance, 'verifyThawaniPayment');
+
+        const savedCode = localStorage.getItem(ACCESS_STORAGE_KEY);
+        if (savedCode) {
+            try {
+                const snap = await getDoc(doc(db, `accessCodes_${GRADE}`, savedCode));
+                if (snap.exists()) {
+                    const data = snap.data();
+                    const notExpired = !data.expiresAt || Date.now() <= data.expiresAt;
+                    if (notExpired && (data.used === true || data.shared === true)) {
+                        showAppContent();
+                        return;
+                    }
+                }
+            } catch (err) {
+                console.error(err);
+            }
+            localStorage.removeItem(ACCESS_STORAGE_KEY);
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        const orderRef = params.get('order_ref');
+        if (orderRef && params.get('paid') === '1') {
+            document.getElementById('gateCodeView').style.display = 'none';
+            document.getElementById('gateVerifying').style.display = 'block';
+            try {
+                const result = await verifyThawaniPaymentFn({ orderRef });
+                const code = result.data.code;
+                document.getElementById('gateVerifying').style.display = 'none';
+                document.getElementById('gateGeneratedCode').innerText = code;
+                document.getElementById('gateCodeResult').style.display = 'block';
+                window.__generatedAccessCode = code;
+                window.history.replaceState({}, document.title, window.location.pathname);
+            } catch (err) {
+                console.error(err);
+                document.getElementById('gateVerifying').style.display = 'none';
+                document.getElementById('gateCodeView').style.display = 'block';
+                gateShowError('gateCodeError', 'تعذّر التحقق من الدفع: ' + (err.message || err));
+            }
+            return;
+        }
+        if (orderRef && params.get('cancelled') === '1') {
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    }
+
+    async function redeemAccessCode() {
+        const input = document.getElementById('gateCodeInput');
+        const errEl = document.getElementById('gateCodeError');
+        const btn = document.getElementById('gateCodeSubmitBtn');
+        errEl.style.display = 'none';
+        const code = input.value.trim().toUpperCase();
+        if (!code) { gateShowError('gateCodeError', 'الرجاء إدخال رمز الدخول.'); return; }
+
+        btn.disabled = true;
+        try {
+            const codeRef = doc(db, `accessCodes_${GRADE}`, code);
+
+            const preSnap = await getDoc(codeRef);
+            if (!preSnap.exists()) { throw new Error('NOT_FOUND'); }
+            const data = preSnap.data();
+
+            if (data.expiresAt && Date.now() > data.expiresAt) {
+                throw new Error('EXPIRED');
+            }
+
+            if (data.shared === true) {
+                localStorage.setItem(ACCESS_STORAGE_KEY, code);
+                showAppContent();
+                return;
+            }
+
+            await runTransaction(db, async (transaction) => {
+                const snap = await transaction.get(codeRef);
+                if (!snap.exists()) { throw new Error('NOT_FOUND'); }
+                if (snap.data().used === true) { throw new Error('ALREADY_USED'); }
+                transaction.update(codeRef, { used: true, usedAt: Date.now() });
+            });
+            localStorage.setItem(ACCESS_STORAGE_KEY, code);
+            showAppContent();
+        } catch (err) {
+            console.error(err);
+            if (err.message === 'NOT_FOUND') {
+                gateShowError('gateCodeError', 'الرمز غير صحيح.');
+            } else if (err.message === 'ALREADY_USED') {
+                gateShowError('gateCodeError', 'هذا الرمز مستخدم من قبل.');
+            } else if (err.message === 'EXPIRED') {
+                gateShowError('gateCodeError', 'انتهت صلاحية هذا الرمز.');
+            } else {
+                gateShowError('gateCodeError', 'حدث خطأ، حاول مرة أخرى.');
+            }
+        } finally {
+            btn.disabled = false;
+        }
+    }
+
+    function enterWithGeneratedCode() {
+        if (window.__generatedAccessCode) {
+            document.getElementById('gateCodeInput').value = window.__generatedAccessCode;
+        }
+        document.getElementById('gateCodeResult').style.display = 'none';
+        document.getElementById('gateCodeView').style.display = 'block';
+        redeemAccessCode();
+    }
+
+    function openPaymentModal() {
+        document.getElementById('paymentError').style.display = 'none';
+        document.getElementById('paymentOverlay').classList.add('open');
+    }
+    function closePaymentModal() {
+        document.getElementById('paymentOverlay').classList.remove('open');
+    }
+
+    async function startThawaniPayment() {
+        const btn = document.getElementById('payNowBtn');
+        document.getElementById('paymentError').style.display = 'none';
+        btn.disabled = true;
+        btn.innerText = 'جارٍ التحويل إلى صفحة الدفع...';
+        try {
+            const result = await createThawaniSessionFn({ grade: GRADE, siteUrl: window.location.origin + window.location.pathname });
+            window.location.href = result.data.checkoutUrl;
+        } catch (err) {
+            console.error(err);
+            gateShowError('paymentError', 'تعذّر بدء عملية الدفع: ' + (err.message || err));
+            btn.disabled = false;
+            btn.innerText = 'الدفع عبر ثواني (فيزا / ماستركارد)';
+        }
+    }
+
+    window.redeemAccessCode = redeemAccessCode;
+    window.enterWithGeneratedCode = enterWithGeneratedCode;
+    window.openPaymentModal = openPaymentModal;
+    window.closePaymentModal = closePaymentModal;
+    window.startThawaniPayment = startThawaniPayment;
+
+    (async () => {
+        await initFirebase();
+        await initAccessGate();
+    })();
+
+    // ==========================================================
+    // قاعدة بيانات جميع الدروس — الهيكل جاهز والمحتوى فارغ (سيظهر "قريباً" تلقائياً)
+    // ==========================================================
+    // الهيكل جاهز والمحتوى فارغ لكل دروس الفصل الأول - سيظهر "قريباً" تلقائياً
+    // يمكن تعبئة أي درس لاحقاً بنفس الصيغة، مثال:
+    // '1-1': { videoUrl: '', summaryImg: '', quiz: [], hard: [], activityBook: [] },
+    const lessonsData = {
+    };
+
+    let currentLessonId = '';
+
+    // ملاحظة: تم دمج منطق هذه الدالة داخل showAppContent() بحيث لا يُفعَّل
+    // إلا بعد نجاح الدفع/التحقق من الرمز، وليس عند مجرد تحميل الصفحة.
+    function enterPlatform() {
+        showAppContent();
+    }
+
+    // فتح الدرس
+    function openLesson(lessonId, lessonTitle) {
+        currentLessonId = lessonId;
+
+        document.getElementById('toc-section').style.display = 'none';
+        document.getElementById('lesson-section').style.display = 'block';
+        document.getElementById('lesson-title').innerText = lessonTitle;
+        document.getElementById('video-lesson-name').innerText = lessonTitle;
+
+        switchTab('video');
+
+        const lessonData = lessonsData[lessonId];
+
+        const videoContainer = document.getElementById('video-container');
+        if (lessonData && lessonData.videoUrl) {
+            videoContainer.innerHTML = `<iframe src="${lessonData.videoUrl}" frameborder="0" allowfullscreen></iframe>`;
+        } else {
+            videoContainer.innerHTML = `<p style="color:white; padding: 50px; text-align:center; margin:0; line-height:1.5;">عذراً، سيتم إضافة مقطع الشرح المرئي لهذا الدرس قريباً.<br>يرجى اختيار أحد الأقسام الأخرى من الأعلى.</p>`;
+        }
+
+        const summaryContainer = document.getElementById('summary-container');
+        if (lessonData && lessonData.summaryImg) {
+            summaryContainer.innerHTML = `<img src="${lessonData.summaryImg}" alt="ملخص ${lessonTitle}">`;
+        } else {
+            summaryContainer.innerHTML = `<div style="background-color: #f4f4f4; padding: 40px; border-radius: 10px; border: 2px dashed #ccc; color: #777;">
+                                            <p style="font-size: 18px; margin: 0;">الورقة الملخصة لهذا الدرس قيد التجهيز وسيتم إرفاقها قريباً ⏳</p>
+                                          </div>`;
+        }
+
+        buildQuiz(lessonData ? lessonData.quiz : null, 'quiz-content', 'submit-btn', 'result-box');
+        buildQuiz(lessonData ? lessonData.hard : null, 'hard-quiz-content', 'submit-hard-btn', 'result-box-hard');
+
+        const activityContainer = document.getElementById('activity-container');
+        const activityImgs = lessonData ? lessonData.activityBook : null;
+        if (activityImgs && activityImgs.length > 0) {
+            activityContainer.innerHTML = activityImgs.map((src, i) =>
+                `<div class="activity-img-wrap">
+                    <img src="${src}" alt="حل صفحة ${i + 1}" onclick="openImgLightbox('${src}')">
+                    <div class="activity-zoom-hint">اضغط على الصورة للتكبير 🔍</div>
+                 </div>`
+            ).join('');
+        } else {
+            activityContainer.innerHTML = `<div style="background-color: #f4f4f4; padding: 40px; border-radius: 10px; border: 2px dashed #ccc; color: #777; text-align:center;">
+                                            <p style="font-size: 18px; margin: 0;">لم تتم إضافة حلول كتاب النشاط لهذا الدرس بعد ⏳</p>
+                                          </div>`;
+        }
+    }
+
+    // فتح وإغلاق نافذة تكبير الصور
+    function openImgLightbox(src) {
+        document.getElementById('img-lightbox-src').src = src;
+        document.getElementById('img-lightbox').classList.add('open');
+    }
+    function closeImgLightbox() {
+        document.getElementById('img-lightbox').classList.remove('open');
+        document.getElementById('img-lightbox-src').src = '';
+    }
+
+    // دالة بناء أسئلة الخيارات
+    function buildQuiz(questionsArray, containerId, btnId, resultId) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = '';
+        document.getElementById(resultId).innerText = '';
+        document.getElementById(btnId).style.display = 'inline-block';
+
+        if (!questionsArray || questionsArray.length === 0) {
+            container.innerHTML = '<p style="color:#777; font-style:italic; text-align:center; padding: 20px;">الأسئلة الخاصة بهذا القسم قيد التجهيز وسيتم إضافتها قريباً...</p>';
+            document.getElementById(btnId).style.display = 'none';
+            return;
+        }
+
+        questionsArray.forEach((item, qIndex) => {
+            let imgHtml = item.img ? `<div style="text-align:center; margin-bottom:15px;"><img src="${item.img}" alt="صورة السؤال" style="max-width:100%; border-radius:10px; border:1px solid #eee;"></div>` : '';
+            let html = `<div class="question-block">
+                            <div class="question-title">${qIndex + 1}- ${item.q}</div>
+                            ${imgHtml}
+                            <div class="options">`;
+            const arabicOptionLetters = ['أ', 'ب', 'ت', 'ث', 'ج', 'ح'];
+            item.options.forEach((opt, optIndex) => {
+                let uniqueName = `q_${containerId}_${qIndex}`;
+                let letter = arabicOptionLetters[optIndex] || (optIndex + 1);
+                html += `<label id="label-${containerId}-${qIndex}-${optIndex}">
+                            <input type="radio" name="${uniqueName}" value="${optIndex}" style="margin-left:10px;">
+                            <span style="font-weight:bold;">${letter}.</span> ${opt}
+                         </label>`;
+            });
+            html += `</div>`;
+
+            const solutionText = item.solution && item.solution.trim()
+                ? item.solution
+                : 'طريقة الحل لهذا السؤال قيد الإضافة، سيتم إرفاقها قريباً ⏳';
+            html += `<button type="button" class="solution-toggle-btn" onclick="toggleSolution('sol-${containerId}-${qIndex}', this)">📝 طريقة الحل</button>
+                      <div class="solution-box" id="sol-${containerId}-${qIndex}">${solutionText}</div>`;
+
+            html += `</div>`;
+            container.innerHTML += html;
+        });
+    }
+
+    function toggleSolution(boxId, btnEl) {
+        const box = document.getElementById(boxId);
+        const isShown = box.classList.toggle('show');
+        btnEl.innerText = isShown ? '🔽 إخفاء طريقة الحل' : '📝 طريقة الحل';
+    }
+
+    function switchTab(tabId) {
+        document.querySelectorAll('.section-card').forEach(card => card.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+        document.getElementById(`card-${tabId}`).classList.add('active');
+        document.getElementById(`tab-${tabId}`).classList.add('active');
+    }
+
+    function checkAnswers(type) {
+        const lessonData = lessonsData[currentLessonId];
+        if (!lessonData) return;
+
+        let questions, containerId, resultId, btnId;
+
+        if (type === 'quiz') {
+            questions = lessonData.quiz;
+            containerId = 'quiz-content';
+            resultId = 'result-box';
+            btnId = 'submit-btn';
+        } else if (type === 'hard') {
+            questions = lessonData.hard;
+            containerId = 'hard-quiz-content';
+            resultId = 'result-box-hard';
+            btnId = 'submit-hard-btn';
+        }
+
+        if (!questions || questions.length === 0) return;
+        let score = 0;
+
+        questions.forEach((item, qIndex) => {
+            let uniqueName = `q_${containerId}_${qIndex}`;
+            const selected = document.querySelector(`input[name="${uniqueName}"]:checked`);
+
+            document.getElementById(`label-${containerId}-${qIndex}-${item.answer}`).classList.add('correct-ans');
+
+            if (selected) {
+                const selectedVal = parseInt(selected.value);
+                if (selectedVal === item.answer) {
+                    score++;
+                } else {
+                    document.getElementById(`label-${containerId}-${qIndex}-${selectedVal}`).classList.add('wrong-ans');
+                }
+            }
+        });
+
+        document.getElementById(resultId).innerText = `النتيجة: ${score} / ${questions.length}`;
+        document.getElementById(btnId).style.display = 'none';
+    }
+
+    function goBack() {
+        document.getElementById('lesson-section').style.display = 'none';
+        document.getElementById('toc-section').style.display = 'block';
+        document.getElementById('video-container').innerHTML = '';
+    }
+
+    // ==========================================================
+    // === قسم مكتبة الاختبارات القصيرة (Firestore collection: quizLibrary) ===
+    // ==========================================================
+    let libQuizzes = [];
+    let libIsTeacher = false;
+    let libPendingFileContent = null;
+    let libPendingThumbnail = null;
+    let libThumbCapturing = false;
+    let libCurrentViewId = null;
+    let libLoadedOnce = false;
+
+    onAuthStateChanged(auth, (user) => {
+        libIsTeacher = !!user;
+        const toggleBtn = document.getElementById('libTeacherToggle');
+        const addBtn = document.getElementById('libAddBtn');
+        if (toggleBtn) toggleBtn.innerText = libIsTeacher ? 'تسجيل خروج المعلم' : 'دخول المعلم';
+        if (addBtn) addBtn.style.display = libIsTeacher ? 'inline-block' : 'none';
+        renderLibGrid();
+
+        const finToggleBtn = document.getElementById('finTeacherToggle');
+        const finAddBtn = document.getElementById('finAddBtn');
+        if (finToggleBtn) finToggleBtn.innerText = libIsTeacher ? 'تسجيل خروج المعلم' : 'دخول المعلم';
+        if (finAddBtn) finAddBtn.style.display = libIsTeacher ? 'inline-block' : 'none';
+        if (finLoadedOnce) renderFinGrid();
+
+        const actToggleBtn = document.getElementById('actTeacherToggle');
+        const actAddBtn = document.getElementById('actAddBtn');
+        if (actToggleBtn) actToggleBtn.innerText = libIsTeacher ? 'تسجيل خروج المعلم' : 'دخول المعلم';
+        if (actAddBtn) actAddBtn.style.display = libIsTeacher ? 'inline-block' : 'none';
+        if (actLoadedOnce) renderActGrid();
+    });
+
+    function openLibrarySection() {
+        document.getElementById('toc-section').style.display = 'none';
+        document.getElementById('library-section').style.display = 'block';
+        if (!libLoadedOnce) {
+            loadLibQuizzes();
+        }
+    }
+
+    function goBackFromLibrary() {
+        document.getElementById('library-section').style.display = 'none';
+        document.getElementById('toc-section').style.display = 'block';
+    }
+
+    async function loadLibQuizzes() {
+        const statusEl = document.getElementById('libStatusMsg');
+        statusEl.style.display = 'block';
+        statusEl.innerText = 'جارٍ التحميل...';
+        try {
+            const snap = await getDocs(collection(db, `quizLibrary_${GRADE}`));
+            libQuizzes = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            libQuizzes.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+            libLoadedOnce = true;
+        } catch (err) {
+            console.error(err);
+            statusEl.innerText = 'تعذّر تحميل الاختبارات: ' + (err.message || err);
+            return;
+        }
+        statusEl.style.display = 'none';
+        renderLibGrid();
+    }
+
+    function handleLibTeacherToggle() {
+        if (libIsTeacher) {
+            signOut(auth);
+            return;
+        }
+        openLibLoginModal();
+    }
+
+    function openLibLoginModal() {
+        document.getElementById('libLoginEmail').value = '';
+        document.getElementById('libLoginPassword').value = '';
+        document.getElementById('libLoginError').style.display = 'none';
+        document.getElementById('libLoginOverlay').classList.add('open');
+    }
+
+    function closeLibLoginModal() {
+        document.getElementById('libLoginOverlay').classList.remove('open');
+    }
+
+    async function submitLibLogin() {
+        const email = document.getElementById('libLoginEmail').value.trim();
+        const password = document.getElementById('libLoginPassword').value;
+        const errorEl = document.getElementById('libLoginError');
+        const btnEl = document.getElementById('libLoginSubmitBtn');
+        errorEl.style.display = 'none';
+
+        if (!email || !password) {
+            errorEl.innerText = 'الرجاء إدخال البريد الإلكتروني وكلمة المرور.';
+            errorEl.style.display = 'block';
+            return;
+        }
+
+        btnEl.disabled = true;
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            closeLibLoginModal();
+        } catch (err) {
+            console.error(err);
+            errorEl.innerText = 'بيانات الدخول غير صحيحة.';
+            errorEl.style.display = 'block';
+        } finally {
+            btnEl.disabled = false;
+        }
+    }
+
+    function libEscapeHtml(s) {
+        const div = document.createElement('div');
+        div.textContent = s;
+        return div.innerHTML;
+    }
+
+    // يبحث داخل كود HTML عن أول صورة (رابط مباشر أو صورة مضمّنة base64)
+    // ليستخدمها كصورة غلاف تلقائية للبطاقة، دون أي إدخال يدوي من المعلم.
+    function libExtractThumbnail(html) {
+        if (!html) return null;
+        try {
+            const matches = html.match(/<img[^>]+src\s*=\s*["']([^"']+)["']/gi);
+            if (!matches) return null;
+            for (const tag of matches) {
+                const m = tag.match(/src\s*=\s*["']([^"']+)["']/i);
+                if (!m) continue;
+                const src = m[1].trim();
+                if (/^data:image\//i.test(src) || /^https?:\/\//i.test(src)) {
+                    return src;
+                }
+            }
+        } catch (e) { /* تجاهل أي خطأ في التحليل */ }
+        return null;
+    }
+
+    // يلتقط صورة (Screenshot) فعلية للشكل النهائي الذي يظهر عند فتح الملف:
+    // يحمّل الملف بشكل خفي داخل iframe مخفي، ينتظر حتى يكتمل عرضه، ثم يستخدم
+    // مكتبة html2canvas (تعمل بالكامل داخل المتصفح، بدون أي خدمة خارجية) لتصويره
+    // كما يظهر فعلياً — بغض النظر عن كونه نص، أزرار، ألوان، رسومات SVG، أو حتى لعبة تفاعلية.
+    function libCaptureScreenshotThumbnail(html) {
+        return new Promise((resolve) => {
+            if (!html || typeof html2canvas === 'undefined') { resolve(null); return; }
+
+            let settled = false;
+            const finish = (result) => {
+                if (settled) return;
+                settled = true;
+                clearTimeout(safetyTimer);
+                if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
+                resolve(result);
+            };
+
+            // مهلة أمان: لو تأخر الالتقاط لأي سبب (ملف ثقيل، سكربت متعطل...) لا نُعلّق العملية للأبد
+            const safetyTimer = setTimeout(() => finish(null), 8000);
+
+            const iframe = document.createElement('iframe');
+            iframe.style.position = 'fixed';
+            iframe.style.top = '0';
+            iframe.style.left = '-99999px';
+            iframe.style.width = '1100px';
+            iframe.style.height = '700px';
+            iframe.style.border = '0';
+            iframe.setAttribute('aria-hidden', 'true');
+
+            iframe.onload = () => {
+                // ننتظر لحظة إضافية حتى تكتمل الخطوط والصور والسكربتات داخل الصفحة المحمّلة
+                setTimeout(() => {
+                    try {
+                        const doc = iframe.contentDocument;
+                        const target = doc && (doc.body || doc.documentElement);
+                        if (!target) { finish(null); return; }
+                        html2canvas(target, {
+                            width: 1100,
+                            height: 700,
+                            windowWidth: 1100,
+                            windowHeight: 700,
+                            useCORS: true,
+                            backgroundColor: '#ffffff',
+                            logging: false,
+                            scale: 1
+                        }).then(canvas => {
+                            try { finish(canvas.toDataURL('image/jpeg', 0.72)); }
+                            catch (e) { finish(null); }
+                        }).catch(() => finish(null));
+                    } catch (e) { finish(null); }
+                }, 1300);
+            };
+            iframe.onerror = () => finish(null);
+
+            document.body.appendChild(iframe);
+            iframe.srcdoc = html;
+        });
+    }
+
+    function renderLibGrid() {
+        const grid = document.getElementById('libGrid');
+        const empty = document.getElementById('libEmptyMsg');
+        const q = (document.getElementById('libSearchInput').value || '').trim();
+
+        const items = q
+            ? libQuizzes.filter(item => item.title.includes(q) || (item.subject || '').includes(q))
+            : libQuizzes;
+
+        if (libQuizzes.length === 0) {
+            grid.style.display = 'none';
+            empty.style.display = 'block';
+            empty.innerHTML = '<span class="lib-empty-icon">📝</span>لا توجد اختبارات بعد.';
+            return;
+        }
+        if (items.length === 0) {
+            grid.style.display = 'none';
+            empty.style.display = 'block';
+            empty.innerHTML = '<span class="lib-empty-icon">🔍</span>لا توجد نتائج مطابقة لبحثك.';
+            return;
+        }
+
+        empty.style.display = 'none';
+        grid.style.display = 'grid';
+        grid.innerHTML = items.map(item => `
+            <div class="lib-card${item.thumbnail ? ' has-thumb' : ''}" style="--lib-c1:#e57454; --lib-c2:#c74a2e;">
+                ${item.thumbnail ? `
+                <div class="lib-thumb">
+                    <img src="${item.thumbnail}" alt="" loading="lazy" onerror="this.closest('.lib-card').classList.remove('has-thumb'); this.parentElement.remove();">
+                    <div class="lib-icon">📝</div>
+                </div>
+                <div class="lib-card-body">
+                    <div class="lib-badge-row">
+                        ${item.subject ? `<span class="lib-badge">${libEscapeHtml(item.subject)}</span>` : ''}
+                    </div>
+                    <h3>${libEscapeHtml(item.title)}</h3>
+                    <div class="lib-meta">📅 أُضيف بتاريخ ${item.dateAdded || ''}</div>
+                    <div class="lib-actions">
+                        <button class="btn" onclick="viewLibQuiz('${item.id}')">فتح</button>
+                        ${libIsTeacher ? `<button class="btn btn-back" style="background-color:#d6453b;" onclick="deleteLibQuiz('${item.id}')">حذف</button>` : ''}
+                    </div>
+                </div>
+                ` : `
+                <div class="lib-card-top">
+                    <div class="lib-icon">📝</div>
+                    <div class="lib-badge-row">
+                        ${item.subject ? `<span class="lib-badge">${libEscapeHtml(item.subject)}</span>` : ''}
+                    </div>
+                </div>
+                <h3>${libEscapeHtml(item.title)}</h3>
+                <div class="lib-meta">📅 أُضيف بتاريخ ${item.dateAdded || ''}</div>
+                <div class="lib-actions">
+                    <button class="btn" onclick="viewLibQuiz('${item.id}')">فتح</button>
+                    ${libIsTeacher ? `<button class="btn btn-back" style="background-color:#d6453b;" onclick="deleteLibQuiz('${item.id}')">حذف</button>` : ''}
+                </div>
+                `}
+            </div>
+        `).join('');
+    }
+
+    function openLibAddModal() {
+        if (!libIsTeacher) { alert('هذا القسم مخصص للمعلم فقط.'); return; }
+        document.getElementById('libQuizTitle').value = '';
+        document.getElementById('libQuizSubject').value = '';
+        document.getElementById('libQuizFile').value = '';
+        document.getElementById('libAddError').style.display = 'none';
+        document.getElementById('libThumbStatus').style.display = 'none';
+        libPendingFileContent = null;
+        libPendingThumbnail = null;
+        libThumbCapturing = false;
+        document.getElementById('libAddOverlay').classList.add('open');
+    }
+
+    function closeLibAddModal() {
+        document.getElementById('libAddOverlay').classList.remove('open');
+    }
+
+    function libShowAddError(msg) {
+        const el = document.getElementById('libAddError');
+        el.innerText = msg;
+        el.style.display = 'block';
+    }
+
+    async function saveLibQuiz() {
+        const title = document.getElementById('libQuizTitle').value.trim();
+        const subject = document.getElementById('libQuizSubject').value.trim();
+        const fileInput = document.getElementById('libQuizFile');
+
+        if (!title) { libShowAddError('الرجاء إدخال عنوان للاختبار.'); return; }
+        if (!fileInput.files[0]) { libShowAddError('الرجاء اختيار ملف HTML.'); return; }
+        if (libPendingFileContent === null || libThumbCapturing) { libShowAddError('لا يزال الملف/صورة الغلاف قيد التجهيز، حاول بعد لحظة.'); return; }
+
+        const newDoc = {
+            title,
+            subject,
+            dateAdded: new Date().toLocaleDateString('ar-OM'),
+            html: libPendingFileContent,
+            thumbnail: libPendingThumbnail || null,
+            createdAt: Date.now()
+        };
+
+        try {
+            const ref = await addDoc(collection(db, `quizLibrary_${GRADE}`), newDoc);
+            libQuizzes.unshift({ id: ref.id, ...newDoc });
+            renderLibGrid();
+            closeLibAddModal();
+        } catch (err) {
+            console.error(err);
+            libShowAddError('تعذّر حفظ الاختبار: ' + (err.message || err));
+        }
+    }
+
+    async function deleteLibQuiz(id) {
+        if (!libIsTeacher) { alert('هذا القسم مخصص للمعلم فقط.'); return; }
+        if (!confirm('هل تريد حذف هذا الاختبار؟')) return;
+        try {
+            await deleteDoc(doc(db, `quizLibrary_${GRADE}`, id));
+            libQuizzes = libQuizzes.filter(item => item.id !== id);
+            renderLibGrid();
+        } catch (err) {
+            console.error(err);
+            alert('تعذّر حذف الاختبار: ' + (err.message || err));
+        }
+    }
+
+    function viewLibQuiz(id) {
+        const item = libQuizzes.find(i => i.id === id);
+        if (!item) return;
+        libCurrentViewId = id;
+        document.getElementById('libViewerTitle').innerText = item.title;
+        document.getElementById('libViewerFrame').srcdoc = item.html;
+        document.getElementById('libViewer').classList.add('open');
+    }
+
+    function closeLibViewer() {
+        document.getElementById('libViewer').classList.remove('open');
+        document.getElementById('libViewerFrame').srcdoc = '';
+        libCurrentViewId = null;
+    }
+
+    function downloadLibCurrent() {
+        const item = libQuizzes.find(i => i.id === libCurrentViewId);
+        if (!item) return;
+        const blob = new Blob([item.html], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = item.title.replace(/[^\w\u0600-\u06FF\- ]/g, '').trim() + '.html';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('libQuizFile').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        const statusEl = document.getElementById('libThumbStatus');
+        libPendingFileContent = null;
+        libPendingThumbnail = null;
+        libThumbCapturing = false;
+        statusEl.style.display = 'none';
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = async () => {
+            libPendingFileContent = reader.result;
+            libThumbCapturing = true;
+            statusEl.style.display = 'block';
+            statusEl.innerText = '📸 جارٍ التقاط صورة غلاف من شكل الملف الفعلي...';
+            const shot = await libCaptureScreenshotThumbnail(reader.result);
+            libPendingThumbnail = shot || libExtractThumbnail(reader.result);
+            libThumbCapturing = false;
+            statusEl.innerText = libPendingThumbnail ? '✅ تم التقاط صورة الغلاف بنجاح' : 'تعذّر التقاط صورة غلاف تلقائية (سيُضاف الاختبار بدون صورة)';
+        };
+        reader.onerror = () => { libShowAddError('تعذّر قراءة الملف.'); };
+        reader.readAsText(file);
+    });
+
+    // ==========================================================
+    // === قسم مكتبة الاختبارات النهائية (Firestore collection: finalExamsLibrary) ===
+    // ==========================================================
+    let finQuizzes = [];
+    let finPendingFileContent = null;
+    let finPendingThumbnail = null;
+    let finThumbCapturing = false;
+    let finCurrentViewId = null;
+    let finLoadedOnce = false;
+
+    function openFinalSection() {
+        document.getElementById('toc-section').style.display = 'none';
+        document.getElementById('final-library-section').style.display = 'block';
+        if (!finLoadedOnce) {
+            loadFinQuizzes();
+        }
+    }
+
+    function goBackFromFinal() {
+        document.getElementById('final-library-section').style.display = 'none';
+        document.getElementById('toc-section').style.display = 'block';
+    }
+
+    async function loadFinQuizzes() {
+        const statusEl = document.getElementById('finStatusMsg');
+        statusEl.style.display = 'block';
+        statusEl.innerText = 'جارٍ التحميل...';
+        try {
+            const snap = await getDocs(collection(db, `finalExamsLibrary_${GRADE}`));
+            finQuizzes = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            finQuizzes.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+            finLoadedOnce = true;
+        } catch (err) {
+            console.error(err);
+            statusEl.innerText = 'تعذّر تحميل الاختبارات: ' + (err.message || err);
+            return;
+        }
+        statusEl.style.display = 'none';
+        renderFinGrid();
+    }
+
+    function renderFinGrid() {
+        const grid = document.getElementById('finGrid');
+        const empty = document.getElementById('finEmptyMsg');
+        const q = (document.getElementById('finSearchInput').value || '').trim();
+
+        const items = q
+            ? finQuizzes.filter(item => item.title.includes(q) || (item.subject || '').includes(q))
+            : finQuizzes;
+
+        if (finQuizzes.length === 0) {
+            grid.style.display = 'none';
+            empty.style.display = 'block';
+            empty.innerHTML = '<span class="lib-empty-icon">📄</span>لا توجد اختبارات بعد.';
+            return;
+        }
+        if (items.length === 0) {
+            grid.style.display = 'none';
+            empty.style.display = 'block';
+            empty.innerHTML = '<span class="lib-empty-icon">🔍</span>لا توجد نتائج مطابقة لبحثك.';
+            return;
+        }
+
+        empty.style.display = 'none';
+        grid.style.display = 'grid';
+        grid.innerHTML = items.map(item => `
+            <div class="lib-card${item.thumbnail ? ' has-thumb' : ''}" style="--lib-c1:#8a68c2; --lib-c2:#5e3d94;">
+                ${item.thumbnail ? `
+                <div class="lib-thumb">
+                    <img src="${item.thumbnail}" alt="" loading="lazy" onerror="this.closest('.lib-card').classList.remove('has-thumb'); this.parentElement.remove();">
+                    <div class="lib-icon">📄</div>
+                </div>
+                <div class="lib-card-body">
+                    <div class="lib-badge-row">
+                        ${item.subject ? `<span class="lib-badge" style="background:#f1ecf8; border-color:#d9caf0; color:#5a3d85;">${libEscapeHtml(item.subject)}</span>` : ''}
+                    </div>
+                    <h3>${libEscapeHtml(item.title)}</h3>
+                    <div class="lib-meta">📅 أُضيف بتاريخ ${item.dateAdded || ''}</div>
+                    <div class="lib-actions">
+                        <button class="btn" style="background-color:#6a4a9b;" onclick="viewFinQuiz('${item.id}')">فتح</button>
+                        ${libIsTeacher ? `<button class="btn btn-back" style="background-color:#d6453b;" onclick="deleteFinQuiz('${item.id}')">حذف</button>` : ''}
+                    </div>
+                </div>
+                ` : `
+                <div class="lib-card-top">
+                    <div class="lib-icon">📄</div>
+                    <div class="lib-badge-row">
+                        ${item.subject ? `<span class="lib-badge" style="background:#f1ecf8; border-color:#d9caf0; color:#5a3d85;">${libEscapeHtml(item.subject)}</span>` : ''}
+                    </div>
+                </div>
+                <h3>${libEscapeHtml(item.title)}</h3>
+                <div class="lib-meta">📅 أُضيف بتاريخ ${item.dateAdded || ''}</div>
+                <div class="lib-actions">
+                    <button class="btn" style="background-color:#6a4a9b;" onclick="viewFinQuiz('${item.id}')">فتح</button>
+                    ${libIsTeacher ? `<button class="btn btn-back" style="background-color:#d6453b;" onclick="deleteFinQuiz('${item.id}')">حذف</button>` : ''}
+                </div>
+                `}
+            </div>
+        `).join('');
+    }
+
+    function openFinAddModal() {
+        if (!libIsTeacher) { alert('هذا القسم مخصص للمعلم فقط.'); return; }
+        document.getElementById('finQuizTitle').value = '';
+        document.getElementById('finQuizSubject').value = '';
+        document.getElementById('finQuizFile').value = '';
+        document.getElementById('finAddError').style.display = 'none';
+        document.getElementById('finThumbStatus').style.display = 'none';
+        finPendingFileContent = null;
+        finPendingThumbnail = null;
+        finThumbCapturing = false;
+        document.getElementById('finAddOverlay').classList.add('open');
+    }
+
+    function closeFinAddModal() {
+        document.getElementById('finAddOverlay').classList.remove('open');
+    }
+
+    function finShowAddError(msg) {
+        const el = document.getElementById('finAddError');
+        el.innerText = msg;
+        el.style.display = 'block';
+    }
+
+    async function saveFinQuiz() {
+        const title = document.getElementById('finQuizTitle').value.trim();
+        const subject = document.getElementById('finQuizSubject').value.trim();
+        const fileInput = document.getElementById('finQuizFile');
+
+        if (!title) { finShowAddError('الرجاء إدخال عنوان للاختبار.'); return; }
+        if (!fileInput.files[0]) { finShowAddError('الرجاء اختيار ملف HTML.'); return; }
+        if (finPendingFileContent === null || finThumbCapturing) { finShowAddError('لا يزال الملف/صورة الغلاف قيد التجهيز، حاول بعد لحظة.'); return; }
+
+        const newDoc = {
+            title,
+            subject,
+            dateAdded: new Date().toLocaleDateString('ar-OM'),
+            html: finPendingFileContent,
+            thumbnail: finPendingThumbnail || null,
+            createdAt: Date.now()
+        };
+
+        try {
+            const ref = await addDoc(collection(db, `finalExamsLibrary_${GRADE}`), newDoc);
+            finQuizzes.unshift({ id: ref.id, ...newDoc });
+            renderFinGrid();
+            closeFinAddModal();
+        } catch (err) {
+            console.error(err);
+            finShowAddError('تعذّر حفظ الاختبار: ' + (err.message || err));
+        }
+    }
+
+    async function deleteFinQuiz(id) {
+        if (!libIsTeacher) { alert('هذا القسم مخصص للمعلم فقط.'); return; }
+        if (!confirm('هل تريد حذف هذا الاختبار؟')) return;
+        try {
+            await deleteDoc(doc(db, `finalExamsLibrary_${GRADE}`, id));
+            finQuizzes = finQuizzes.filter(item => item.id !== id);
+            renderFinGrid();
+        } catch (err) {
+            console.error(err);
+            alert('تعذّر حذف الاختبار: ' + (err.message || err));
+        }
+    }
+
+    function viewFinQuiz(id) {
+        const item = finQuizzes.find(i => i.id === id);
+        if (!item) return;
+        finCurrentViewId = id;
+        document.getElementById('finViewerTitle').innerText = item.title;
+        document.getElementById('finViewerFrame').srcdoc = item.html;
+        document.getElementById('finViewer').classList.add('open');
+    }
+
+    function closeFinViewer() {
+        document.getElementById('finViewer').classList.remove('open');
+        document.getElementById('finViewerFrame').srcdoc = '';
+        finCurrentViewId = null;
+    }
+
+    function downloadFinCurrent() {
+        const item = finQuizzes.find(i => i.id === finCurrentViewId);
+        if (!item) return;
+        const blob = new Blob([item.html], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = item.title.replace(/[^\w\u0600-\u06FF\- ]/g, '').trim() + '.html';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('finQuizFile').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        const statusEl = document.getElementById('finThumbStatus');
+        finPendingFileContent = null;
+        finPendingThumbnail = null;
+        finThumbCapturing = false;
+        statusEl.style.display = 'none';
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = async () => {
+            finPendingFileContent = reader.result;
+            finThumbCapturing = true;
+            statusEl.style.display = 'block';
+            statusEl.innerText = '📸 جارٍ التقاط صورة غلاف من شكل الملف الفعلي...';
+            const shot = await libCaptureScreenshotThumbnail(reader.result);
+            finPendingThumbnail = shot || libExtractThumbnail(reader.result);
+            finThumbCapturing = false;
+            statusEl.innerText = finPendingThumbnail ? '✅ تم التقاط صورة الغلاف بنجاح' : 'تعذّر التقاط صورة غلاف تلقائية (سيُضاف الاختبار بدون صورة)';
+        };
+        reader.onerror = () => { finShowAddError('تعذّر قراءة الملف.'); };
+        reader.readAsText(file);
+    });
+
+    // ==========================================================
+    // === قسم مكتبة الأنشطة والألعاب (Firestore collection: activitiesGamesLibrary) ===
+    // ==========================================================
+    let actItems = [];
+    let actPendingFileContent = null;
+    let actPendingThumbnail = null;
+    let actThumbCapturing = false;
+    let actCurrentViewId = null;
+    let actLoadedOnce = false;
+
+    function openActSection() {
+        document.getElementById('toc-section').style.display = 'none';
+        document.getElementById('act-library-section').style.display = 'block';
+        if (!actLoadedOnce) {
+            loadActItems();
+        }
+    }
+
+    function goBackFromAct() {
+        document.getElementById('act-library-section').style.display = 'none';
+        document.getElementById('toc-section').style.display = 'block';
+    }
+
+    async function loadActItems() {
+        const statusEl = document.getElementById('actStatusMsg');
+        statusEl.style.display = 'block';
+        statusEl.innerText = 'جارٍ التحميل...';
+        try {
+            const snap = await getDocs(collection(db, `activitiesGamesLibrary_${GRADE}`));
+            actItems = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            actItems.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+            actLoadedOnce = true;
+        } catch (err) {
+            console.error(err);
+            statusEl.innerText = 'تعذّر تحميل الأنشطة: ' + (err.message || err);
+            return;
+        }
+        statusEl.style.display = 'none';
+        renderActGrid();
+    }
+
+    function renderActGrid() {
+        const grid = document.getElementById('actGrid');
+        const empty = document.getElementById('actEmptyMsg');
+        const q = (document.getElementById('actSearchInput').value || '').trim();
+
+        const items = q
+            ? actItems.filter(item => item.title.includes(q) || (item.subject || '').includes(q))
+            : actItems;
+
+        if (actItems.length === 0) {
+            grid.style.display = 'none';
+            empty.style.display = 'block';
+            empty.innerHTML = '<span class="lib-empty-icon">🎮</span>لا توجد أنشطة بعد.';
+            return;
+        }
+        if (items.length === 0) {
+            grid.style.display = 'none';
+            empty.style.display = 'block';
+            empty.innerHTML = '<span class="lib-empty-icon">🔍</span>لا توجد نتائج مطابقة لبحثك.';
+            return;
+        }
+
+        empty.style.display = 'none';
+        grid.style.display = 'grid';
+        grid.innerHTML = items.map(item => `
+            <div class="lib-card${item.thumbnail ? ' has-thumb' : ''}" style="--lib-c1:#4aa9d4; --lib-c2:#236f95;">
+                ${item.thumbnail ? `
+                <div class="lib-thumb">
+                    <img src="${item.thumbnail}" alt="" loading="lazy" onerror="this.closest('.lib-card').classList.remove('has-thumb'); this.parentElement.remove();">
+                    <div class="lib-icon">${item.sourceType === 'link' ? '🔗' : '🎮'}</div>
+                </div>
+                <div class="lib-card-body">
+                    <div class="lib-badge-row">
+                        <span class="lib-badge" style="background:${item.sourceType === 'link' ? '#fff3e0' : '#e8f2f7'}; border-color:${item.sourceType === 'link' ? '#ffdca8' : '#c3ddea'}; color:${item.sourceType === 'link' ? '#8a5a00' : '#215f79'};">${item.sourceType === 'link' ? '🔗 رابط' : '📄 ملف'}</span>
+                        ${item.subject ? `<span class="lib-badge" style="background:#e8f2f7; border-color:#c3ddea; color:#215f79;">${libEscapeHtml(item.subject)}</span>` : ''}
+                    </div>
+                    <h3>${libEscapeHtml(item.title)}</h3>
+                    <div class="lib-meta">📅 أُضيف بتاريخ ${item.dateAdded || ''}</div>
+                    <div class="lib-actions">
+                        <button class="btn" style="background-color:#2e86ab;" onclick="viewActItem('${item.id}')">فتح</button>
+                        ${libIsTeacher ? `<button class="btn btn-back" style="background-color:#d6453b;" onclick="deleteActItem('${item.id}')">حذف</button>` : ''}
+                    </div>
+                </div>
+                ` : `
+                <div class="lib-card-top">
+                    <div class="lib-icon">${item.sourceType === 'link' ? '🔗' : '🎮'}</div>
+                    <div class="lib-badge-row">
+                        <span class="lib-badge" style="background:${item.sourceType === 'link' ? '#fff3e0' : '#e8f2f7'}; border-color:${item.sourceType === 'link' ? '#ffdca8' : '#c3ddea'}; color:${item.sourceType === 'link' ? '#8a5a00' : '#215f79'};">${item.sourceType === 'link' ? '🔗 رابط' : '📄 ملف'}</span>
+                        ${item.subject ? `<span class="lib-badge" style="background:#e8f2f7; border-color:#c3ddea; color:#215f79;">${libEscapeHtml(item.subject)}</span>` : ''}
+                    </div>
+                </div>
+                <h3>${libEscapeHtml(item.title)}</h3>
+                <div class="lib-meta">📅 أُضيف بتاريخ ${item.dateAdded || ''}</div>
+                <div class="lib-actions">
+                    <button class="btn" style="background-color:#2e86ab;" onclick="viewActItem('${item.id}')">فتح</button>
+                    ${libIsTeacher ? `<button class="btn btn-back" style="background-color:#d6453b;" onclick="deleteActItem('${item.id}')">حذف</button>` : ''}
+                </div>
+                `}
+            </div>
+        `).join('');
+    }
+
+    function openActAddModal() {
+        if (!libIsTeacher) { alert('هذا القسم مخصص للمعلم فقط.'); return; }
+        document.getElementById('actQuizTitle').value = '';
+        document.getElementById('actQuizSubject').value = '';
+        document.getElementById('actQuizFile').value = '';
+        document.getElementById('actQuizLink').value = '';
+        document.getElementById('actSourceTypeFile').checked = true;
+        document.getElementById('actAddError').style.display = 'none';
+        document.getElementById('actThumbStatus').style.display = 'none';
+        actPendingFileContent = null;
+        actPendingThumbnail = null;
+        actThumbCapturing = false;
+        actToggleSourceType();
+        document.getElementById('actAddOverlay').classList.add('open');
+    }
+
+    function closeActAddModal() {
+        document.getElementById('actAddOverlay').classList.remove('open');
+    }
+
+    function actToggleSourceType() {
+        const isLink = document.getElementById('actSourceTypeLink').checked;
+        document.getElementById('actFileFieldWrap').style.display = isLink ? 'none' : 'block';
+        document.getElementById('actLinkFieldWrap').style.display = isLink ? 'block' : 'none';
+    }
+
+    function actShowAddError(msg) {
+        const el = document.getElementById('actAddError');
+        el.innerText = msg;
+        el.style.display = 'block';
+    }
+
+    async function saveActItem() {
+        const title = document.getElementById('actQuizTitle').value.trim();
+        const subject = document.getElementById('actQuizSubject').value.trim();
+        const isLink = document.getElementById('actSourceTypeLink').checked;
+
+        if (!title) { actShowAddError('الرجاء إدخال عنوان للنشاط.'); return; }
+
+        let newDoc = {
+            title,
+            subject,
+            dateAdded: new Date().toLocaleDateString('ar-OM'),
+            createdAt: Date.now()
+        };
+
+        if (isLink) {
+            let url = document.getElementById('actQuizLink').value.trim();
+            if (!url) { actShowAddError('الرجاء إدخال رابط الصفحة.'); return; }
+            if (!/^https?:\/\//i.test(url)) { url = 'https://' + url; }
+            newDoc.sourceType = 'link';
+            newDoc.url = url;
+        } else {
+            const fileInput = document.getElementById('actQuizFile');
+            if (!fileInput.files[0]) { actShowAddError('الرجاء اختيار ملف HTML.'); return; }
+            if (actPendingFileContent === null || actThumbCapturing) { actShowAddError('لا يزال الملف/صورة الغلاف قيد التجهيز، حاول بعد لحظة.'); return; }
+            newDoc.sourceType = 'file';
+            newDoc.html = actPendingFileContent;
+            newDoc.thumbnail = actPendingThumbnail || null;
+        }
+
+        try {
+            const ref = await addDoc(collection(db, `activitiesGamesLibrary_${GRADE}`), newDoc);
+            actItems.unshift({ id: ref.id, ...newDoc });
+            renderActGrid();
+            closeActAddModal();
+        } catch (err) {
+            console.error(err);
+            actShowAddError('تعذّر حفظ النشاط: ' + (err.message || err));
+        }
+    }
+
+    async function deleteActItem(id) {
+        if (!libIsTeacher) { alert('هذا القسم مخصص للمعلم فقط.'); return; }
+        if (!confirm('هل تريد حذف هذا النشاط؟')) return;
+        try {
+            await deleteDoc(doc(db, `activitiesGamesLibrary_${GRADE}`, id));
+            actItems = actItems.filter(item => item.id !== id);
+            renderActGrid();
+        } catch (err) {
+            console.error(err);
+            alert('تعذّر حذف النشاط: ' + (err.message || err));
+        }
+    }
+
+    function viewActItem(id) {
+        const item = actItems.find(i => i.id === id);
+        if (!item) return;
+        actCurrentViewId = id;
+        document.getElementById('actViewerTitle').innerText = item.title;
+        const frame = document.getElementById('actViewerFrame');
+        const downloadBtn = document.getElementById('actDownloadBtn');
+        const newTabBtn = document.getElementById('actOpenNewTabBtn');
+        if (item.sourceType === 'link') {
+            frame.removeAttribute('srcdoc');
+            frame.src = item.url;
+            downloadBtn.style.display = 'none';
+            newTabBtn.style.display = '';
+        } else {
+            frame.removeAttribute('src');
+            frame.srcdoc = item.html;
+            downloadBtn.style.display = '';
+            newTabBtn.style.display = 'none';
+        }
+        document.getElementById('actViewer').classList.add('open');
+    }
+
+    function closeActViewer() {
+        document.getElementById('actViewer').classList.remove('open');
+        const frame = document.getElementById('actViewerFrame');
+        frame.srcdoc = '';
+        frame.removeAttribute('src');
+        actCurrentViewId = null;
+    }
+
+    function downloadActCurrent() {
+        const item = actItems.find(i => i.id === actCurrentViewId);
+        if (!item || item.sourceType === 'link') return;
+        const blob = new Blob([item.html], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = item.title.replace(/[^\w\u0600-\u06FF\- ]/g, '').trim() + '.html';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    function openActInNewTab() {
+        const item = actItems.find(i => i.id === actCurrentViewId);
+        if (!item || !item.url) return;
+        window.open(item.url, '_blank', 'noopener');
+    }
+
+    document.getElementById('actQuizFile').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        const statusEl = document.getElementById('actThumbStatus');
+        actPendingFileContent = null;
+        actPendingThumbnail = null;
+        actThumbCapturing = false;
+        statusEl.style.display = 'none';
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = async () => {
+            actPendingFileContent = reader.result;
+            actThumbCapturing = true;
+            statusEl.style.display = 'block';
+            statusEl.innerText = '📸 جارٍ التقاط صورة غلاف من شكل الملف الفعلي...';
+            const shot = await libCaptureScreenshotThumbnail(reader.result);
+            actPendingThumbnail = shot || libExtractThumbnail(reader.result);
+            actThumbCapturing = false;
+            statusEl.innerText = actPendingThumbnail ? '✅ تم التقاط صورة الغلاف بنجاح' : 'تعذّر التقاط صورة غلاف تلقائية (سيُضاف النشاط بدون صورة)';
+        };
+        reader.onerror = () => { actShowAddError('تعذّر قراءة الملف.'); };
+        reader.readAsText(file);
+    });
+
+    // إتاحة الدوال التالية عالمياً لأنها تُستدعى من خصائص onclick في HTML
+    window.openImgLightbox = openImgLightbox;
+    window.closeImgLightbox = closeImgLightbox;
+    window.openLesson = openLesson;
+    window.switchTab = switchTab;
+    window.checkAnswers = checkAnswers;
+    window.goBack = goBack;
+    window.toggleSolution = toggleSolution;
+    window.openLibrarySection = openLibrarySection;
+    window.goBackFromLibrary = goBackFromLibrary;
+    window.handleLibTeacherToggle = handleLibTeacherToggle;
+    window.closeLibLoginModal = closeLibLoginModal;
+    window.submitLibLogin = submitLibLogin;
+    window.renderLibGrid = renderLibGrid;
+    window.openLibAddModal = openLibAddModal;
+    window.closeLibAddModal = closeLibAddModal;
+    window.saveLibQuiz = saveLibQuiz;
+    window.deleteLibQuiz = deleteLibQuiz;
+    window.viewLibQuiz = viewLibQuiz;
+    window.closeLibViewer = closeLibViewer;
+    window.downloadLibCurrent = downloadLibCurrent;
+    window.openFinalSection = openFinalSection;
+    window.goBackFromFinal = goBackFromFinal;
+    window.renderFinGrid = renderFinGrid;
+    window.openFinAddModal = openFinAddModal;
+    window.closeFinAddModal = closeFinAddModal;
+    window.saveFinQuiz = saveFinQuiz;
+    window.deleteFinQuiz = deleteFinQuiz;
+    window.viewFinQuiz = viewFinQuiz;
+    window.closeFinViewer = closeFinViewer;
+    window.downloadFinCurrent = downloadFinCurrent;
+    window.openActSection = openActSection;
+    window.goBackFromAct = goBackFromAct;
+    window.renderActGrid = renderActGrid;
+    window.openActAddModal = openActAddModal;
+    window.closeActAddModal = closeActAddModal;
+    window.actToggleSourceType = actToggleSourceType;
+    window.saveActItem = saveActItem;
+    window.deleteActItem = deleteActItem;
+    window.viewActItem = viewActItem;
+    window.closeActViewer = closeActViewer;
+    window.downloadActCurrent = downloadActCurrent;
+    window.openActInNewTab = openActInNewTab;
+
+</script>
+</body>
+</html>
